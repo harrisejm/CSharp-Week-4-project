@@ -3,7 +3,10 @@
 
  <table>
  <tr>
-    <th>NAME</th>
+ <th>Number</th>
+ <th>NAME</th>
+ <th>Stylist</th>
+
   </tr>
 
   @foreach(var client in Model)
@@ -11,7 +14,6 @@
   <tr>
      <td>@client.GetId()</td>
      <td>@client.GetName()</td>
-
   </tr>
  }
 </table>

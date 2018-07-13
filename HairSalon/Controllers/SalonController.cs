@@ -49,7 +49,7 @@ public ActionResult EditClients()
 public ActionResult Edit()
 {
  Client newClient = new Client(Request.Form["new-client"], int.Parse(Request.Form["new-assignment"]));
- newClient.Save();
+ newClient.SaveClient();
  List<Client> allClient = Client.GetAll();
 //return View("ClientList", allClient);
 //return RedirectToAction("ClientList");

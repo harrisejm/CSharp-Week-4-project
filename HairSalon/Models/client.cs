@@ -67,7 +67,7 @@ namespace Salon.Models
     //     return this.GetId().GetHashCode();
     // }
 
-    public void Save()
+    public void SaveClient()
     {
         MySqlConnection conn = DB.Connection();
         conn.Open();

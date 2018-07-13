@@ -3,16 +3,18 @@
 
  <table>
  <tr>
+    <th>Employee #</th>
     <th>NAME</th>
   </tr>
-  <tr>
+
   @foreach(var stylist in Model)
   {
-     <td>
-     <ul>
-         <p>"@stylist.GetName()"</p>
-     </ul>
-     </td>
+  <tr>
+     <td>"@stylist.GetId()"</td>
+     <td>"@stylist.GetName()"</td>
+     <td><a href="/salon/@item.GetId()/update">Edit</a></td>
+     <td><a href="/salon/@item.GetId()/delete">Delete</a></td>
+  </tr>
  }
 
 

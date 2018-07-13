@@ -76,10 +76,10 @@ namespace Salon.Models
       {
 
         int stylistId = rdr.GetInt32(0);
-        string stylistDescription = rdr.GetString(1);
+        string stylistName = rdr.GetString(1);
 
 
-        Stylist newStylist = new Stylist(stylistDescription, stylistId);
+        Stylist newStylist = new Stylist(stylistName, stylistId);
 
         allStylists.Add(newStylist);
       }
@@ -104,6 +104,9 @@ namespace Salon.Models
         conn.Dispose();
     }
 }
+
+
+
 
 
 

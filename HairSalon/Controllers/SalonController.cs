@@ -11,8 +11,8 @@ namespace Salon.Controllers
     [HttpGet("/salon")]
     public ActionResult Index()
     {
-        List<Item> allItems = Item.GetAll();
-        return View(allItems);
+        List<Stylist> allStylists = Stylist.GetAll();
+        return View(allStylists);
     }
 
     [HttpGet("/salon/new")]

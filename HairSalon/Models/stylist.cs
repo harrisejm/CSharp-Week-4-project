@@ -6,21 +6,45 @@ namespace Salon.Models
     public class Stylist
     {
       private string _name;
-      private string _gender;
+      private int _id;
+      //private string _gender;
 
       public Stylist(string name, int id = 0)
       {
         _name = name;
+        _id = id;
+
 
       }
       public string GetName()
       {
         return _name;
       }
+      public int GetId()
+      {
+        return _id;
+      }
       // public string GetGender()
       // {
       //   return _gender;
       // }
+
+
+      public override bool Equals(System.Object otherStylist)
+          {
+            if (!(otherStylist is Stylist))
+            {
+              return false;
+            }
+            else
+            {
+              Stylist newStylist = (Stylist) otherStylist;
+              bool idEquality = (this.GetName() == newStylist.GetName());
+
+              return (idEquality);
+            }
+          }
+
 
       public void Save()
       {
@@ -28,12 +52,8 @@ namespace Salon.Models
           conn.Open();
 
           var cmd = conn.CreateCommand() as MySqlCommand;
-          cmd.CommandText = @"INSERT INTO stylist (name) VALUES (@name);";
-
-          MySqlParameter description = new MySqlParameter("@name", _name);
-          //description.ParameterName = "@name";
-        //  description.Value = this._name;
-          cmd.Parameters.Add(name);
+          cmd.CommandText = @"INSERT INTO stylists (name) VALUES (@name);";
+         cmd.Parameters.Add(new MySqlParameter("@name", _name));
 
           cmd.ExecuteNonQuery();
           _id = (int) cmd.LastInsertedId;
@@ -42,13 +62,11 @@ namespace Salon.Models
           {
               conn.Dispose();
           }
-
       }
 
-
-      public static List<stylist> GetAll()
+      public static List<Stylist> GetAll()
     {
-      List<stylist> allDog = new List<stylist> {};
+      List<Stylist> allStylists = new List<Stylist> {};
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
@@ -61,17 +79,31 @@ namespace Salon.Models
         string stylistDescription = rdr.GetString(1);
 
 
-        Stylist newStylist = new Stylist(stylistId, stylistDescription);
+        Stylist newStylist = new Stylist(stylistDescription, stylistId);
 
-        allDog.Add(newDog);
+        allStylists.Add(newStylist);
       }
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
-      return allDog;
+      return allStylists;
     }
+
+    public static void DeleteAll()
+{
+    MySqlConnection conn = DB.Connection();
+    conn.Open();
+    var cmd = conn.CreateCommand() as MySqlCommand;
+    cmd.CommandText = @"DELETE FROM stylists;";
+    cmd.ExecuteNonQuery();
+    conn.Close();
+    if (conn != null)
+    {
+        conn.Dispose();
+    }
+}
 
 
 

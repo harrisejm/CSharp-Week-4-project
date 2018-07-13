@@ -1,0 +1,19 @@
+<p>List of stylists</p>
+
+
+ <table>
+ <tr>
+    <th>NAME</th>
+  </tr>
+  <tr>
+  @foreach(var stylist in Model)
+  {
+     <td>
+     <ul>
+         <p>"@stylist.GetName()"</p>
+     </ul>
+     </td>
+ }
+
+
+</table>

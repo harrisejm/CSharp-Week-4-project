@@ -1,8 +1,8 @@
 using System;
 using MySql.Data.MySqlClient;
-using Inventory;
+using Salon;
 
-namespace Inventory.Models
+namespace Salon.Models
 {
     public class DB
     {

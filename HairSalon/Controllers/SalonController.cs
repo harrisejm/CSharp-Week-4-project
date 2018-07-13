@@ -30,6 +30,22 @@ namespace Salon.Controllers
     return View("Index", allStylists);
 }
 
+[HttpGet("/client/new")]
+public ActionResult StylistList()
+{
+    return View();
+}
+
+// [HttpPost("/client")]
+// public ActionResult Create()
+// {
+//  Stylist newStylist = new Stylist(Request.Form["new-stylist"]);
+//  newStylist.Save();
+//  List<Stylist> allStylists = Stylist.GetAll();
+// return View("StylistList", allStylists);
+// }
+
+
 // [HttpGet("/salon/{id}/update")]
 //    public ActionResult UpdateForm(int id)
 //    {

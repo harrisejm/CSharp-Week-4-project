@@ -25,30 +25,48 @@ namespace Salon.Models
     {
       return _id;
     }
-    public int stylistId()
+    public int GetStylistId()
     {
       return _stylistId;
     }
 
-
     public override bool Equals(System.Object otherClient)
-    {
-        if (!(otherClient is Client))
         {
+          if (!(otherClient is Client))
+          {
             return false;
+          }
+          else
+          {
+            Client newClient = (Client) otherClient;
+            bool idEquality = (this.GetId() == newClient.GetId());
+            bool nameEquality = (this.GetName() == newClient.GetName());
+            bool stylistEquality = (this.GetStylistId() == newClient.GetStylistId());
+            return (idEquality && nameEquality && stylistEquality);
+          }
         }
-        else
-        {
-            CLient newClient = (Client) otherClient;
-            return this.GetId().Equals(newClient.GetId());
-        }
-    }
-    public override int GetHashCode()
-    {
-        return this.GetId().GetHashCode();
-    }
 
-    ublic void Save()
+
+    // public override bool Equals(System.Object otherClient)
+    // {
+    //     if (!(otherClient is Client))
+    //     {
+    //         return false;
+    //     }
+    //     else
+    //     {
+    //         Client newClient = (Client) otherClient;
+    //         return this.GetId().Equals(newClient.GetId());
+    //     }
+    // }
+    //
+    //
+    // public override int GetHashCode()
+    // {
+    //     return this.GetId().GetHashCode();
+    // }
+
+    public void Save()
     {
         MySqlConnection conn = DB.Connection();
         conn.Open();
@@ -80,10 +98,10 @@ namespace Salon.Models
 
       int clientId = rdr.GetInt32(0);
       string clientName = rdr.GetString(1);
-      int
+      int stylistId = rdr.GetInt32(3);
 
 
-      Client newClient = new Client(clientName, clientId);
+      Client newClient = new Client(clientName, stylistId, clientId);
 
       allClients.Add(newClient);
     }
@@ -92,7 +110,7 @@ namespace Salon.Models
     {
       conn.Dispose();
     }
-    return allStylists;
+    return allClients;
     }
 
     public static void DeleteAll()

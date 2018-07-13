@@ -45,6 +45,23 @@ namespace Salon.Tests
        }
 
 
+       [TestMethod]
+       public void Save_DatabaseAssignsIdToDescription_Id()
+       {
+         //Arrange
+         Stylist testStylist = new Stylist("Jimmy");
+         testStylist.Save();
+
+         //Act
+         Stylist savedStylist = Stylist.GetAll()[0];
+
+         int result = savedStylist.GetId();
+         int testId = testStylist.GetId();
+
+         //Assert
+         Assert.AreEqual(testId, result);
+      }
+
 
 
 

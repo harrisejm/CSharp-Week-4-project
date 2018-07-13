@@ -1,0 +1,20 @@
+<p>List ofc clients</p>
+
+
+ <table>
+ <tr>
+    <th>NAME</th>
+  </tr>
+
+  @foreach(var client in Model)
+  {
+  <tr>
+     <td>"@client.GetId()"</td>
+     <td>"@client.GetName()"</td>
+  </tr>
+ }
+<p><a href='/salon/new'>Add new stylist<a/></P>
+<p><a href='/client/new'>Back to stylists<a/></P>
+
+
+</table>

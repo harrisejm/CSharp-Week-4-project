@@ -14,7 +14,7 @@ namespace Salon.Tests
           Stylist.DeleteAll();
 
         }
-        public stylistTests()
+        public clientTests()
         {
             DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=eddie_harris_test;";
         }
@@ -23,7 +23,7 @@ namespace Salon.Tests
        public void GetAll_DescriptionEmptyAtFirst_0()
        {
          //Arrange, Act
-         int result = Stylist.GetAll().Count;
+         int result = Client.GetAll().Count;
 
          //Assert
          Assert.AreEqual(0, result);
@@ -34,13 +34,34 @@ namespace Salon.Tests
        public void Save_SavesToDatabase_ItemList()
        {
          //Arrange
-         Stylist testStylist = new Stylist("Eddie");
+         Client testClient = new Client("Eddie", 1);
 
          //Act
-         testStylist.Save();
-         List<Stylist> result = Stylist.GetAll();
-         List<Stylist> testList = new List<Stylist>{testStylist};
+         testClient.Save();
+         List<Client> result = Client.GetAll();
+         List<Client> testList = new List<Client>{testClient};
 
          //Assert
          CollectionAssert.AreEqual(testList, result);
        }
+       [TestMethod]
+       public void Save_DatabaseAssignsIdToDescription_Id()
+       {
+         //Arrange
+         Client testClient = new Client("Jimmy", 1);
+         testClient.Save();
+
+         //Act
+         Client savedClient = Client.GetAll()[0];
+
+         int result = savedClient.GetId();
+         int testId = testClient.GetId();
+
+         //Assert
+         Assert.AreEqual(testId, result);
+      }
+
+
+
+}
+}

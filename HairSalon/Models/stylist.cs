@@ -24,26 +24,45 @@ namespace Salon.Models
       {
         return _id;
       }
-      // public string GetGender()
-      // {
-      //   return _gender;
-      // }
+
+
+      //
+      // public override bool Equals(System.Object otherStylist)
+      //     {
+      //       if (!(otherStylist is Stylist))
+      //       {
+      //         return false;
+      //       }
+      //       else
+      //       {
+      //         Stylist newStylist = (Stylist) otherStylist;
+      //         bool idEquality = (this.GetId() == newStylist.GetId());
+      //         bool nameEquality = (this.GetName() == newStylist.GetName());
+      //         bool clientEquality = (this.GetName() == newStylist.GetName());
+      //
+      //         return (idEquality && nameEquality);
+      //       }
+      //     }
 
 
       public override bool Equals(System.Object otherStylist)
+      {
+          if (!(otherStylist is Stylist))
           {
-            if (!(otherStylist is Stylist))
-            {
               return false;
-            }
-            else
-            {
-              Stylist newStylist = (Stylist) otherStylist;
-              bool idEquality = (this.GetName() == newStylist.GetName());
-
-              return (idEquality);
-            }
           }
+          else
+          {
+              Stylist newStylist = (Stylist) otherStylist;
+              return this.GetId().Equals(newStylist.GetId());
+          }
+      }
+      public override int GetHashCode()
+      {
+          return this.GetId().GetHashCode();
+      }
+
+
 
 
       public void Save()

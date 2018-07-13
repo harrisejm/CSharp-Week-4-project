@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
+
 namespace Salon.Models
 
 {
@@ -72,7 +73,7 @@ namespace Salon.Models
         conn.Open();
 
         var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"INSERT INTO stylists (name, stylist_id) VALUES (@name, @SalonStylist_id);";
+        cmd.CommandText = @"INSERT INTO clients (name, stylist_id) VALUES (@name, @SalonStylist_id);";
        cmd.Parameters.Add(new MySqlParameter("@name", _name));
        cmd.Parameters.Add(new MySqlParameter("@SalonStylist_id", _stylistId));
 
@@ -98,7 +99,7 @@ namespace Salon.Models
 
       int clientId = rdr.GetInt32(0);
       string clientName = rdr.GetString(1);
-      int stylistId = rdr.GetInt32(3);
+      int stylistId = rdr.GetInt32(2);
 
 
       Client newClient = new Client(clientName, stylistId, clientId);

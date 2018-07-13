@@ -1,22 +1,19 @@
-<p>List of stylists</p>
+<p>List of clients</p>
 
 
  <table>
  <tr>
-    <th>Employee #</th>
     <th>NAME</th>
   </tr>
 
-  @foreach(var stylist in Model)
+  @foreach(var client in Model)
   {
   <tr>
-     <td>"@stylist.GetId()"</td>
-     <td>"@stylist.GetName()"</td>
-     <td>"@stylist.GetId()"</td>
-     <td>"@stylist.GetName()"</td>
-     <td><a href='/salon/new'>Client list<a/></td>
+     <td>@client.GetId()</td>
+     <td>@client.GetName()</td>
+
   </tr>
  }
-
-
 </table>
+<p><a href='/clients/new'>Add new client<a/></P>
+<p><a href='/salon'>Back to stylists<a/></P>

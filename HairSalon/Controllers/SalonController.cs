@@ -30,20 +30,31 @@ namespace Salon.Controllers
     return View("Index", allStylists);
 }
 
-[HttpGet("/client/new")]
-public ActionResult StylistList()
+
+
+
+[HttpGet("/clients")]
+public ActionResult ClientList()
+{
+    return View(Client.GetAll());
+}
+
+[HttpGet("/clients/new")]
+public ActionResult EditClients()
 {
     return View();
 }
 
-// [HttpPost("/client")]
-// public ActionResult Create()
-// {
-//  Stylist newStylist = new Stylist(Request.Form["new-stylist"]);
-//  newStylist.Save();
-//  List<Stylist> allStylists = Stylist.GetAll();
-// return View("StylistList", allStylists);
-// }
+[HttpPost("/clients")]
+public ActionResult Edit()
+{
+ Client newClient = new Client(Request.Form["new-client"], int.Parse(Request.Form["new-assignment"]));
+ newClient.Save();
+ List<Client> allClient = Client.GetAll();
+//return View("ClientList", allClient);
+//return RedirectToAction("ClientList");
+  return View("ClientList", allClient);
+}
 
 
 // [HttpGet("/salon/{id}/update")]
@@ -67,8 +78,6 @@ public ActionResult StylistList()
 //        thisStylist.Delete();
 //        return RedirectToAction("Index");
 //    }
-
-
 
 
 

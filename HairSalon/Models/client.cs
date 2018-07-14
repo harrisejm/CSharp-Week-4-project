@@ -30,6 +30,10 @@ namespace Salon.Models
     {
       return _stylistId;
     }
+    // public int SetStylistId(int stylistId)
+    // {
+    //  _stylistId = stylistId;
+    // }
 
     public override bool Equals(System.Object otherClient)
         {
@@ -67,7 +71,7 @@ namespace Salon.Models
     //     return this.GetId().GetHashCode();
     // }
 
-    public void SaveClient()
+    public void Save()
     {
         MySqlConnection conn = DB.Connection();
         conn.Open();
@@ -127,6 +131,45 @@ namespace Salon.Models
       conn.Dispose();
     }
     }
+
+
+    public static List<Client> Find(int id)
+    {
+      List<Client> findClients = new List<Client> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      //var cmd = conn.CreateCommand() as MySqlCommand;
+
+        cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = " + id + ";"; //@thisStylistId;";
+      //  MySqlParameter thisStylistId = new MySqlParameter();
+        // thisStylistId.ParameterName = "@thisStylistId";
+        // thisStylistId.Value = id;
+      //  cmd.Parameters.Add(thisStylistId);
+
+        var rdr = cmd.ExecuteReader() as MySqlDataReader;
+        // int stylist_Id = 0;
+        // int clientId = 0;
+        // string clientName = "";
+
+        while (rdr.Read())
+        {
+          int clientId = rdr.GetInt32(0);
+          string clientName = rdr.GetString(1);
+          int stylist_Id = rdr.GetInt32(2);
+          Client foundClient = new Client(clientName, stylist_Id, clientId);
+          findClients.Add(foundClient);
+        }
+
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return findClients;
+    }
+
 
 
 

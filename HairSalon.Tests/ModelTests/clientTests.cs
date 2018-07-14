@@ -12,7 +12,6 @@ namespace Salon.Tests
         {
           Client.DeleteAll();
           Stylist.DeleteAll();
-
         }
         public clientTests()
         {

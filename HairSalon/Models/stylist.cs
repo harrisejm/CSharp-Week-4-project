@@ -139,7 +139,6 @@ public static Stylist Find(int id)
     int stylistId = 0;
     string stylistName = "";
 
-
     while (rdr.Read())
     {
       stylistId = rdr.GetInt32(0);

@@ -1,15 +1,17 @@
 <p>Enter new Client</p>
-<form action="/clients" method="post">
-
+<form action="/clients/list" method="post">
 
   <div class='form-group'>
     <label for='new-client'>Enter Name</label>
     <input id='new-client' name='new-client' class='form-control' type='text'>
   </div>
-  <div class='form-group'>
-    <label for='new-assignment'>Enter Stylist Number</label>
-    <input id='new-assignment' name='new-assignment' class='form-control' type='text'>
-  </div>
+  <div class="radio">
+  <label>
+    <input type="radio" name="new-stylistId" value="@Model.GetId()" checked> Stylist:
+    @Model.GetName()
+  </label>
+</div>
 
   <button type="submit">Submit</button>
 </form>
+@Model.GetId()

@@ -30,7 +30,7 @@ namespace Salon.Controllers
     return View("Index", allStylists);
 }
 
-
+////////
 
 
 [HttpGet("/clients")]
@@ -38,24 +38,31 @@ public ActionResult ClientList()
 {
     return View(Client.GetAll());
 }
-
-[HttpGet("/clients/new")]
-public ActionResult EditClients()
-{
-    return View();
-}
-
-[HttpPost("/clients")]
+// [HttpGet("/clients/new")]
+//    public ActionResult EditClients()
+//    {
+//        return View();
+//    }
+[HttpGet("/clients/{id}/new")]
+    public ActionResult EditClients(int id)
+    {
+        Stylist thisStylist = Stylist.Find(id);
+      //  thisStylist.Save();
+    //   List<Stylist> allStyllists = Stylist.GetAll();
+        return View(thisStylist);
+    }
+[HttpPost("/clients/list")]
 public ActionResult Edit()
 {
- Client newClient = new Client(Request.Form["new-client"], int.Parse(Request.Form["new-assignment"]));
- newClient.SaveClient();
- List<Client> allClient = Client.GetAll();
-//return View("ClientList", allClient);
+ Client newClient = new Client(Request.Form["new-client"], int.Parse(Request.Form["new-stylistId"]));
+ newClient.Save();
+ //int test = int.Parse(Request.Form["new-stylistId"]);
+// List<Client> allClient = Client.Find(test);
+//  Client testt = Client.Find(test);
 //return RedirectToAction("ClientList");
-  return View("ClientList", allClient);
-}
 
+  return View("ClientList", Client.Find(int.Parse(Request.Form["new-stylistId"])));
+}
 
 // [HttpGet("/salon/{id}/update")]
 //    public ActionResult UpdateForm(int id)

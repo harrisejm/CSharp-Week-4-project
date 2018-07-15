@@ -3,18 +3,16 @@
 }
 
 <div class="center">
-<div class="move">
-<div class="test">
-<h1>New Pokemon Card</h1>
-<a href='/salon'>Back to List<a/>
-
-<h3>Update stylists information:</h3>
-<form action="/items/@Model.GetId()/update" method="post">
-  <label for="updatename">Name of Stylist</label>
-  <input id="updatename" name="updatename" type="text" value="@Model.GetName()">
-
-  <button type="submit">Submit</button>
-</form>
-</div>
-</div>
+  <div class="move">
+    <div class="test">
+      <h1>New Pokemon Card</h1>
+      <a href='/salon'>Back to List<a/>
+      <h3>Update stylists information:</h3>
+      <form action="/items/@Model.GetId()/update" method="post">
+        <label for="updatename">Name of Stylist</label>
+        <input id="updatename" name="updatename" type="text" value="@Model.GetName()">
+      <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
 </div>

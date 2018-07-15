@@ -2,31 +2,25 @@
   Layout = "_Layout";
 }
 <div class="center">
-<div class="move">
-<div class="test">
-
-<p>List of stylists</p>
-
-
- <table>
- <tr>
-    <th>Employee No.</th>
-    <th>NAME</th>
-    <th>Clients</th>
-  </tr>
-
-  @foreach(var stylist in Model)
-  {
-  <tr>
-     <td>"@stylist.GetId()"</td>
-     <td>"@stylist.GetName()"</td>
-     <td><a href='/clients/@stylist.GetId()/all'>Client list<a/></td>
-  </tr>
- }
-
-
-</table>
- <p><a href='/salon/new'>Add new stylist<a/></p>
-</div>
-</div>
+  <div class="move">
+    <div class="test">
+      <p>List of stylists</p>
+      <table>
+        <tr>
+          <th>Employee No.</th>
+          <th>NAME</th>
+          <th>Clients</th>
+        </tr>
+        @foreach(var stylist in Model)
+        {
+        <tr>
+          <td>@stylist.GetId()</td>
+          <td>@stylist.GetName()</td>
+          <td><a href='/clients/@stylist.GetId()/all'>Client list<a/></td>
+        </tr>
+        }
+      </table>
+      <p><a href='/salon/new'>Add new stylist<a/></p>
+    </div>
+  </div>
 </div>

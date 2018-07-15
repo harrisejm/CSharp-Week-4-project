@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jul 14, 2018 at 01:27 AM
--- Server version: 5.6.35
--- PHP Version: 7.0.15
+-- Generation Time: Jul 15, 2018 at 09:45 PM
+-- Server version: 5.6.38
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -31,18 +31,25 @@ USE `eddie_harris`;
 CREATE TABLE `clients` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `stylist_id` int(11) DEFAULT NULL
+  `stylist_id` int(11) DEFAULT NULL,
+  `stylist_Name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`id`, `name`, `stylist_id`) VALUES
-(1, 'qqqq', 1),
-(2, 'Hello', 12),
-(3, 'test', 1),
-(4, 'sfad', 23);
+INSERT INTO `clients` (`id`, `name`, `stylist_id`, `stylist_Name`) VALUES
+(95, 'Jane Johnson', 1, 'Eddie Harris'),
+(96, 'Katie Jones', 2, 'Jimmy John'),
+(97, 'Alice  Smith', 1, 'Eddie Harris'),
+(98, 'Krystal Lin', 2, 'Jimmy John'),
+(99, 'Dwayne Johnson', 2, 'Jimmy John'),
+(100, 'The Rock', 1, 'Eddie Harris'),
+(101, 'Welcome', 46, 'Ms. Cutter'),
+(102, 'Welcome', 47, 'Edward Scissorhands'),
+(103, 'Shaun Alexander', 46, 'Ms. Cutter'),
+(104, 'Cat', 2, 'Jimmy John');
 
 -- --------------------------------------------------------
 
@@ -62,20 +69,8 @@ CREATE TABLE `stylists` (
 INSERT INTO `stylists` (`id`, `name`) VALUES
 (1, 'Eddie Harris'),
 (2, 'Jimmy John'),
-(3, 'Jimmy John'),
-(4, 'Test Name'),
-(5, 'gdgvmj,k'),
-(6, ''),
-(7, ''),
-(8, ''),
-(9, 'cfb'),
-(10, 'fsgdgdg'),
-(11, 'sfdg'),
-(12, 'sfdg'),
-(13, 'bcfb'),
-(14, 'bcfb'),
-(15, 'Hello'),
-(16, 'Person');
+(46, 'Ms. Cutter'),
+(47, 'Ed Scissorhands');
 
 --
 -- Indexes for dumped tables
@@ -101,12 +96,14 @@ ALTER TABLE `stylists`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+
 --
 -- AUTO_INCREMENT for table `stylists`
 --
 ALTER TABLE `stylists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

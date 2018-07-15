@@ -27,6 +27,10 @@ namespace Salon.Controllers
      Stylist newStylist = new Stylist(Request.Form["new-stylist"]);
      newStylist.Save();
      List<Stylist> allStylists = Stylist.GetAll();
+
+     Client newClient = new Client("Welcome", allStylists[allStylists.Count-1].GetId(), Request.Form["new-stylist"]);
+     newClient.Save();
+
     return View("Index", allStylists);
 }
 
@@ -54,7 +58,7 @@ public ActionResult ClientList(int id)
 [HttpPost("/clients/list")]
 public ActionResult Edit()
 {
- Client newClient = new Client(Request.Form["new-client"], int.Parse(Request.Form["new-stylistId"]));
+ Client newClient = new Client(Request.Form["new-client"], int.Parse(Request.Form["new-stylistId"]), Request.Form["new-stylistName"]);
  newClient.Save();
  //int test = int.Parse(Request.Form["new-stylistId"]);
 // List<Client> allClient = Client.Find(test);

@@ -2,24 +2,24 @@
   Layout = "_Layout";
 }
 <div class="center">
-<div class="move">
-<div class="test">
-<p>Enter new Client</p>
-<form action="/clients/list" method="post">
-
-  <div class='form-group'>
-    <label for='new-client'>Enter Name</label>
-    <input id='new-client' name='new-client' class='form-control' type='text'>
+  <div class="move">
+    <div class="test">
+    <p>Enter new Client</p>
+      <form action="/clients/list" method="post">
+        <div class='form-group'>
+          <label for='new-client'>Enter Name</label>
+          <input id='new-client' name='new-client' class='form-control' type='text'>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="new-stylistId" value="@Model.GetId()" checked> Stylist: @Model.GetName()
+          </label>
+          <label>
+            <input type="radio" name="new-stylistName" value="@Model.GetName()" checked> Stylist No.: @Model.GetId()
+          </label>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   </div>
-  <div class="radio">
-  <label>
-    <input type="radio" name="new-stylistId" value="@Model.GetId()" checked> Stylist:
-    @Model.GetName()
-  </label>
-</div>
-
-  <button type="submit">Submit</button>
-</form>
-</div>
-</div>
 </div>

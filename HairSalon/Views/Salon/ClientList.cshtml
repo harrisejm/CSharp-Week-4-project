@@ -2,30 +2,31 @@
   Layout = "_Layout";
 }
 <div class="center">
-<div class="move">
-<div class="test">
+  <div class="move">
+    <div class="test">
 
-<h1 class="name">@Model[0].GetName() List of client's</h1>
-<p>List of clients</p>
- <table>
- <tr>
- <th>Client Number</th>
- <th>NAME </th>
- <th>Stylist</th>
-
-  </tr>
-
-  @foreach(var client in Model)
-  {
-  <tr>
-     <td>@client.GetId()</td>
-     <td>@client.GetName()</td>
-     <td>@client.GetStylistId()</td>
-  </tr>
- }
-</table>
-<p><a href='/clients/@Model[0].GetStylistId()/new'>Add new client<a/></P>
-<p><a href='/salon'>Back to stylists<a/></P>
-</div>
-</div>
+      <h1 class="name">@Model[0].GetStylistName()</h1>
+      <p>List of clients</p>
+      <table>
+      <tr>
+        <th>Client Number</th>
+        <th>NAME </th>
+        <th>Stylist</th>
+      </tr>
+      @foreach(var client in Model)
+      {
+      @if (client.GetName() != "Welcome")
+      {
+      <tr>
+        <td>@client.GetId()</td>
+        <td>@client.GetName()</td>
+        <td>@client.GetStylistId()</td>
+      </tr>
+      }
+      }
+      </table>
+      <p><a href='/clients/@Model[0].GetStylistId()/new'>Add new client<a/></P>
+      <p><a href='/salon'>Back to stylists<a/></P>
+    </div>
+  </div>
 </div>

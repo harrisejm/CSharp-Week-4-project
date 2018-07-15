@@ -1,10 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+<div class="center">
+<div class="move">
+<div class="test">
+
+<h1 class="name">@Model[0].GetName() List of client's</h1>
 <p>List of clients</p>
-
-
  <table>
  <tr>
- <th>Number</th>
- <th>NAME</th>
+ <th>Client Number</th>
+ <th>NAME </th>
  <th>Stylist</th>
 
   </tr>
@@ -18,5 +24,8 @@
   </tr>
  }
 </table>
-<p><a href='/clients/{id}/new'>Add new client<a/></P>
+<p><a href='/clients/@Model[0].GetStylistId()/new'>Add new client<a/></P>
 <p><a href='/salon'>Back to stylists<a/></P>
+</div>
+</div>
+</div>

@@ -61,7 +61,19 @@ namespace Salon.Tests
          //Assert
          Assert.AreEqual(testId, result);
       }
+      [TestMethod]
+      public void Find_FindStylistInDatabase_Description()
+      {
+        //Arrange
+        Stylist testStylist = new Stylist("test");
+         testStylist.Save();
 
+        //Act
+        Stylist foundStylist = Stylist.Find(testStylist.GetId());
+
+        //Assert
+        Assert.AreEqual(testStylist, foundStylist);
+      }
 
 
 

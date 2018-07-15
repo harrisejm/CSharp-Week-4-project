@@ -1,0 +1,42 @@
+body {
+  background-image: url("../img/1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+table {
+  font-size: 20px;
+  border-style: solid;
+}
+td, th {
+  border-style: solid;
+  text-align: center;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+div.center {
+  width: 700px;
+  margin: auto;
+  padding: 20px;
+}
+div.move {
+  border: solid;
+  background-color: white;
+  opacity: .8;
+  border-radius: 10px
+}
+
+h1.name {
+  font-family: cursive;
+  font-size: 50px;
+}
+
+div.test {
+  padding: 20px;
+}
+
+p {
+  font-size: 30px;
+}

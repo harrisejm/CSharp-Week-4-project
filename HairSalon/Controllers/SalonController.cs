@@ -32,11 +32,11 @@ namespace Salon.Controllers
 
 ////////
 
-
-[HttpGet("/clients")]
-public ActionResult ClientList()
+[Produces("text/html")]
+[HttpGet("/clients/{id}/all")]
+public ActionResult ClientList(int id)
 {
-    return View(Client.GetAll());
+    return View(Client.Find(id));
 }
 // [HttpGet("/clients/new")]
 //    public ActionResult EditClients()

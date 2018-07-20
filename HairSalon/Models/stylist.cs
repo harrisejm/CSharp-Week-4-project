@@ -124,7 +124,7 @@ namespace Salon.Models
       if (conn != null)
       {
         conn.Dispose();
-      }
+
       return foundStylist;
     }
 

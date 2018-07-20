@@ -104,10 +104,22 @@ public ActionResult Edit()
     Specialty newSpecialty = new Specialty(Request.Form["new-specialty"]);
      newSpecialty.Save();
      List<Specialty> allSpecialty = Specialty.GetAll();
-
-
    return View("Specialties", allSpecialty);
+  }
 
+
+  [HttpGet("/specialty/{id}/all")]
+  public ActionResult specialtiesByStylist(int id)
+  {
+    //  Dictionary<string, object> model = new Dictionary<string, object>();
+
+      List<Specialty> selectedSpecialty = Stylist.GetSpecialtyByStylist(id);
+    //  Stylist selectedStylist = Stylist.Find(id);
+
+    //  model.Add("clientList", selectedSpecialty);
+    //  model.Add("StylistName", selectedStylist);
+
+    return View("Specialties", selectedSpecialty);
   }
 
 

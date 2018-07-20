@@ -194,6 +194,10 @@ namespace Salon.Models
     conn.Dispose();
   }
 }
+
+
+
+
 ////delete sytlist name
 // public void Edit(string newName, int newStylistId, string newStylistName)
 // {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 namespace Salon.Models
-{
+ {
   public class Stylist
   {
     private string _name;
@@ -72,9 +72,7 @@ namespace Salon.Models
       {
         int stylistId = rdr.GetInt32(0);
         string stylistName = rdr.GetString(1);
-
         Stylist newStylist = new Stylist(stylistName, stylistId);
-
         allStylists.Add(newStylist);
       }
       conn.Close();
@@ -124,45 +122,42 @@ namespace Salon.Models
       if (conn != null)
       {
         conn.Dispose();
-
+}
       return foundStylist;
     }
 
-    public static List<Client> GetClientsByStylist(int id)
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT clients.* FROM stylists
-      JOIN stylists_clients ON (stylists.id = stylists_clients.stylist_id)
-      JOIN clients ON (stylists_clients.client_id = clients.id)
-      WHERE stylists.id = @StylistId;";
+public static List<Client> GetClientsByStylist(int id)
+{
+  MySqlConnection conn = DB.Connection();
+  conn.Open();
+  MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+  cmd.CommandText = @"SELECT clients.* FROM stylists
+  JOIN stylists_clients ON (stylists.id = stylists_clients.stylist_id)
+  JOIN clients ON (stylists_clients.client_id = clients.id)
+  WHERE stylists.id = @StylistId;";
 
-      MySqlParameter stylistIdParameter = new MySqlParameter();
-      stylistIdParameter.ParameterName = "@StylistId";
-      stylistIdParameter.Value = id;
-      cmd.Parameters.Add(stylistIdParameter);
+  MySqlParameter stylistIdParameter = new MySqlParameter();
+  stylistIdParameter.ParameterName = "@StylistId";
+  stylistIdParameter.Value = id;
+  cmd.Parameters.Add(stylistIdParameter);
 
-      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-      List<Client> clients = new List<Client>{};
+  MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+  List<Client> clients = new List<Client>{};
 
-      while(rdr.Read())
-      {
-        int stylistId = rdr.GetInt32(0);
-        string stylistName = rdr.GetString(1);
+  while(rdr.Read())
+  {
+    int stylistId = rdr.GetInt32(0);
+    string stylistName = rdr.GetString(1);
 
-
-        Client newClient = new Client(stylistName, stylistId);
-        clients.Add(newClient);
-      }
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-      return clients;
-    }
-
-
+    Client newClient = new Client(stylistName, stylistId);
+    clients.Add(newClient);
   }
+  conn.Close();
+  if (conn != null)
+  {
+    conn.Dispose();
+  }
+  return clients;
+}
+}
 }

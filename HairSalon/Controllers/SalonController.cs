@@ -29,8 +29,6 @@ namespace Salon.Controllers
      List<Stylist> allStylists = Stylist.GetAll();
     //  Client newClient = new Client("Welcome", allStylists[allStylists.Count-1].GetId(), Request.Form["new-stylist"]);
      Client newClient = new Client("Welcome");
-
-
      newClient.Save();
 
     return View("Index", allStylists);
@@ -76,7 +74,6 @@ public ActionResult Edit()
         return View(allClient);
     }
 
-
 [HttpGet("/clients/{id}/update")]
    public ActionResult EditClientsAll(int id)
    {
@@ -85,6 +82,38 @@ public ActionResult Edit()
         List<Stylist> thisStylist = Stylist.GetAll();
        return View(thisStylist);
    }
+
+/////////////////
+
+ [HttpGet("salon/specialty")]
+  public ActionResult Specialties()
+    {
+     List<Specialty> allSpecialties = Specialty.GetAll();
+     return View(allSpecialties);
+    }
+
+    [HttpGet("/salon/specialty/new")]
+    public ActionResult CreateForm()
+    {
+        return View();
+    }
+
+    [HttpPost("//salon/specialty/add")]
+    public ActionResult Create()
+    {
+     Stylist newStylist = new Stylist(Request.Form["new-stylist"]);
+     newStylist.Save();
+     List<Stylist> allStylists = Stylist.GetAll();
+    //  Client newClient = new Client("Welcome", allStylists[allStylists.Count-1].GetId(), Request.Form["new-stylist"]);
+     Client newClient = new Client("Welcome");
+
+
+     newClient.Save();
+
+    return View("Index", allStylists);
+  }
+
+
 
  // [HttpPost("/clients/update")]
  //    public ActionResult Update(int id)

@@ -202,7 +202,7 @@ public static List<Stylist> GetStylistByClient(int id)
   cmd.CommandText = @"SELECT stylists.* FROM clients
   JOIN stylists_clients ON (clients.id = stylists_clients.client_id)
   JOIN stylists ON (stylists_clients.stylist_id = stylists.id)
-  WHERE stylists.id = @ClientId;";
+  WHERE clients.id = @ClientId;";
 
   MySqlParameter clientIdParameter = new MySqlParameter();
   clientIdParameter.ParameterName = "@ClientId";

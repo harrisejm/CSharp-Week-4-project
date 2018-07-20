@@ -58,13 +58,25 @@ public ActionResult ClientList(int id)
         return View(thisStylist);
     }
 
-[HttpPost("/clients/list")]
-public ActionResult Edit()
+[HttpPost("/clients/{id}/list")]
+public ActionResult Edit(int id)
 {
- Client newClient = new Client(Request.Form["new-client"]);
- newClient.Save();
- Stylist.AddNewFlight();
-  return View("ClientList", Client.Find(int.Parse(Request.Form["new-stylistId"])));
+
+  Dictionary<string, object> model = new Dictionary<string, object>();
+
+  Client newClient = new Client(Request.Form["new-client"]);
+  newClient.Save();
+  Stylist.AddNewClient(id, newClient.GetId());
+
+
+  List<Client> selectedClients = Stylist.GetClientsByStylist(id);
+  Stylist selectedStylist = Stylist.Find(id);
+
+  model.Add("clientList", selectedClients);
+  model.Add("StylistName", selectedStylist);
+
+
+  return View("ClientList", model);
 }
 //Stylist.GetClientsByStylist();
 
@@ -131,8 +143,6 @@ public ActionResult Edit()
     return View(allSpecialty);
   }
 
-
-
  // [HttpPost("/clients/update")]
  //    public ActionResult Update(int id)
  //    {
@@ -151,16 +161,10 @@ public ActionResult Edit()
     public ActionResult Delete(int id)
     {
        Client selectClient = Client.FindClient(id);
-       List<Stylist> remainClient = Client.GetStylistByClient(selectClient.GetId());
+       List<Stylist> foundStylist = Client.GetStylistByClient(id);
 
-      // int stylistOutput = selectClient.GetStylistByClient()
-
-    //  List<Client> remainClient = Client.Find(stylistOutput);
-    //  List<Client> remainClient = Client.GetClientsByStylist()
-
-       selectClient.Delete();
-
-       return View(remainClient);
+  selectClient.Delete();
+       return View(foundStylist);
     }
 
 

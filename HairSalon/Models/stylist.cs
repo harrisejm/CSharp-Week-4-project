@@ -194,12 +194,12 @@ namespace Salon.Models
       return specialties;
     }
 
-    public static void AddNewFlight(int stylistId, int clientId)
+    public static void AddNewClient(int stylistId, int clientId)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO stylists_clients (stylist_id, client_number) VALUES (@StylistId, @ClientId);";
+      cmd.CommandText = @"INSERT INTO stylists_clients (stylist_id, client_id) VALUES (@StylistId, @ClientId);";
 
       MySqlParameter stylists_id = new MySqlParameter();
       stylists_id.ParameterName = "@StylistId";

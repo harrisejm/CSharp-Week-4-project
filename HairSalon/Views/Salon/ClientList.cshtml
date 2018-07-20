@@ -12,6 +12,7 @@
         <th>Client Number</th>
         <th>NAME </th>
         <th>Stylist</th>
+        <th>Remove</th>
       </tr>
       @foreach(var client in Model)
       {
@@ -21,6 +22,7 @@
         <td>@client.GetId()</td>
         <td>@client.GetName()</td>
         <td>@client.GetStylistId()</td>
+        <td><a href="/clients/@client.GetId()/delete">Delete</a></td>
       </tr>
       }
       }

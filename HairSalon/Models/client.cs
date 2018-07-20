@@ -120,7 +120,7 @@ namespace Salon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = " + id + ";"; 
+      cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = " + id + ";";
 
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
 
@@ -130,6 +130,7 @@ namespace Salon.Models
         string clientName = rdr.GetString(1);
         int stylist_Id = rdr.GetInt32(2);
         string stylistName = rdr.GetString(3);
+
         Client foundClient = new Client(clientName, stylist_Id, stylistName, clientId);
         findClients.Add(foundClient);
       }
@@ -140,5 +141,65 @@ namespace Salon.Models
       }
       return findClients;
     }
+
+    public static Client FindClient(int id)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM clients WHERE id = @thisId;";
+      MySqlParameter thisId = new MySqlParameter();
+      thisId.ParameterName = "@thisId";
+      thisId.Value = id;
+      cmd.Parameters.Add(thisId);
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+
+      int clientId = 0;
+      string clientName = "";
+      int stylist_Id = 0;
+      string stylistName = "";
+
+      while (rdr.Read())
+      {
+        clientId = rdr.GetInt32(0);
+        clientName = rdr.GetString(1);
+        stylist_Id = rdr.GetInt32(2);
+        stylistName = rdr.GetString(3);
+      }
+      Client foundClient = new Client(clientName, stylist_Id, stylistName, clientId);
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return foundClient;
+    }
+
+    public void Delete()
+{
+  MySqlConnection conn = DB.Connection();
+  conn.Open();
+
+  var cmd = conn.CreateCommand() as MySqlCommand;
+  cmd.CommandText = @"DELETE FROM clients WHERE id = @thisId;";
+
+  MySqlParameter searchId = new MySqlParameter();
+  searchId.ParameterName = "@thisId";
+  searchId.Value = _id;
+  cmd.Parameters.Add(searchId);
+
+
+
+  cmd.ExecuteNonQuery();
+
+  conn.Close();
+  if (conn != null)
+  {
+    conn.Dispose();
+  }
+}
+
   }
 }

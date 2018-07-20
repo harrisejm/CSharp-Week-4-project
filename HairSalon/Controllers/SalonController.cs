@@ -63,6 +63,7 @@ public ActionResult Edit()
 {
  Client newClient = new Client(Request.Form["new-client"]);
  newClient.Save();
+ Stylist.AddNewFlight();
   return View("ClientList", Client.Find(int.Parse(Request.Form["new-stylistId"])));
 }
 //Stylist.GetClientsByStylist();
@@ -109,17 +110,25 @@ public ActionResult Edit()
 
 
   [HttpGet("/specialty/{id}/all")]
-  public ActionResult specialtiesByStylist(int id)
+  public ActionResult stylistsSpecialties(int id)
   {
-    //  Dictionary<string, object> model = new Dictionary<string, object>();
+      Dictionary<string, object> model = new Dictionary<string, object>();
 
       List<Specialty> selectedSpecialty = Stylist.GetSpecialtyByStylist(id);
-    //  Stylist selectedStylist = Stylist.Find(id);
+      Stylist selectedStylist = Stylist.Find(id);
 
-    //  model.Add("clientList", selectedSpecialty);
-    //  model.Add("StylistName", selectedStylist);
+      model.Add("SpecialtyList", selectedSpecialty);
+      model.Add("StylistName", selectedStylist);
 
-    return View("Specialties", selectedSpecialty);
+      return View(model);
+  }
+
+  [HttpGet("/salon/specialty/add")]
+  public ActionResult addSpecialtyStylist()
+  {
+    List<Specialty> allSpecialty = Specialty.GetAll();
+
+    return View(allSpecialty);
   }
 
 
@@ -138,15 +147,21 @@ public ActionResult Edit()
  //    }
 
 
-    // [HttpGet("/clients/{id}/delete")]
-    // public ActionResult Delete(int id)
-    // {
-    //    Client selectClient = Client.FindClient(id);
-    //    int stylistOutput = selectClient.GetStylistId();
-    //     List<Client> remainClient = Client.Find(stylistOutput);
-    //     selectClient.Delete();
-    //    return View(remainClient);
-    // }
+    [HttpGet("/clients/{id}/delete")]
+    public ActionResult Delete(int id)
+    {
+       Client selectClient = Client.FindClient(id);
+       List<Stylist> remainClient = Client.GetStylistByClient(selectClient.GetId());
+
+      // int stylistOutput = selectClient.GetStylistByClient()
+
+    //  List<Client> remainClient = Client.Find(stylistOutput);
+    //  List<Client> remainClient = Client.GetClientsByStylist()
+
+       selectClient.Delete();
+
+       return View(remainClient);
+    }
 
 
 

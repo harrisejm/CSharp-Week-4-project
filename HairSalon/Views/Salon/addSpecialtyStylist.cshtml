@@ -1,0 +1,34 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="center">
+  <div class="move">
+    <div class="test">
+
+     <p>Add Specialty</p>
+     <form action="/salon/specialty" method="post">
+       <div class='form-group'>
+
+       <label>
+
+
+       @foreach(var specialty in Model)
+       {
+          <label>
+         <input type="Radio" name="new-specialty" value="@specialty.GetSpecialtyId()" checked>
+         @specialty.GetSpecialtyName()
+         </label>
+          <br>
+        }
+
+
+
+       </div>
+
+
+       <button type="submit">Submit</button>
+     </form>
+    </div>
+  </div>
+</div>

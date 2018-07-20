@@ -120,7 +120,7 @@ namespace Salon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylists_clients WHERE stylist_id = " + id + ";";
+      cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = " + id + ";";
 
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
 
@@ -152,7 +152,6 @@ namespace Salon.Models
       cmd.Parameters.Add(thisId);
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
 
-
       int clientId = 0;
       string clientName = "";
 
@@ -173,7 +172,7 @@ namespace Salon.Models
       return foundClient;
     }
 
-    public void Delete()
+  public void Delete()
 {
   MySqlConnection conn = DB.Connection();
   conn.Open();
@@ -195,7 +194,39 @@ namespace Salon.Models
   }
 }
 
+public static List<Stylist> GetStylistByClient(int id)
+{
+  MySqlConnection conn = DB.Connection();
+  conn.Open();
+  MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+  cmd.CommandText = @"SELECT stylists.* FROM clients
+  JOIN stylists_clients ON (clients.id = stylists_clients.client_id)
+  JOIN stylists ON (stylists_clients.stylist_id = stylists.id)
+  WHERE stylists.id = @ClientId;";
 
+  MySqlParameter clientIdParameter = new MySqlParameter();
+  clientIdParameter.ParameterName = "@ClientId";
+  clientIdParameter.Value = id;
+  cmd.Parameters.Add(clientIdParameter);
+
+  MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+  List<Stylist> stylists = new List<Stylist>{};
+
+  while(rdr.Read())
+  {
+    int clientId = rdr.GetInt32(0);
+    string clientName = rdr.GetString(1);
+
+    Stylist newStylist = new Stylist(clientName, clientId);
+    stylists.Add(newStylist);
+  }
+  conn.Close();
+  if (conn != null)
+  {
+    conn.Dispose();
+  }
+  return stylists;
+}
 
 
 ////delete sytlist name

@@ -143,16 +143,17 @@ public ActionResult Edit(int id)
     return View(allSpecialty);
   }
 
-  [HttpGet("/salon/specialty/{id}/delete")]
-  public ActionResult DeleteSpecialty(int id)
-  {
-     Client selectClient = Client.FindClient(id);
-     List<Stylist> foundStylist = Client.GetStylistByClient(id);
-
-     selectClient.Delete();
-  //   selectClient.DeleteFromJoin();
-     return View();
-  }
+  // [HttpGet("/salon/specialty/{id}/delete")]
+  // public ActionResult DeleteSpecialty(int id)
+  // {
+  //    Specialty selectedSpecialty = Specialty.indSpeciality(id);
+  //
+  //    List<Stylist> foundStylist = Specialty.GetStylistBySpecialty(id);
+  //
+  //    selectedSpecialty.Delete();
+  //    selectedSpecialty.DeleteFromJoin();
+  //    return View();
+  // }
 
  // [HttpPost("/clients/update")]
  //    public ActionResult Update(int id)

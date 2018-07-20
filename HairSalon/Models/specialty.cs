@@ -154,6 +154,53 @@ public static List<Stylist> GetStylistBySpecialty(int id)
   return stylists;
 }
 
+public void Delete()
+{
+MySqlConnection conn = DB.Connection();
+conn.Open();
+
+var cmd = conn.CreateCommand() as MySqlCommand;
+cmd.CommandText = @"DELETE FROM specialties WHERE id = @thisId;";
+
+MySqlParameter searchId = new MySqlParameter();
+searchId.ParameterName = "@thisId";
+searchId.Value = _id;
+cmd.Parameters.Add(searchId);
+
+cmd.ExecuteNonQuery();
+
+conn.Close();
+if (conn != null)
+{
+  conn.Dispose();
+}
+}
+
+
+public void DeleteFromJoin()
+{
+MySqlConnection conn = DB.Connection();
+conn.Open();
+
+var cmd = conn.CreateCommand() as MySqlCommand;
+cmd.CommandText = @"DELETE FROM stylists_specialties WHERE specialty_id = @thisId;";
+
+MySqlParameter searchId = new MySqlParameter();
+searchId.ParameterName = "@thisId";
+searchId.Value = _id;
+cmd.Parameters.Add(searchId);
+
+cmd.ExecuteNonQuery();
+
+conn.Close();
+if (conn != null)
+{
+conn.Dispose();
+}
+}
+
+
+
 
 
 

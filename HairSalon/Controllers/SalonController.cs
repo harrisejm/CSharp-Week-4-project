@@ -143,6 +143,17 @@ public ActionResult Edit(int id)
     return View(allSpecialty);
   }
 
+  [HttpGet("/salon/specialty/{id}/delete")]
+  public ActionResult DeleteSpecialty(int id)
+  {
+     Client selectClient = Client.FindClient(id);
+     List<Stylist> foundStylist = Client.GetStylistByClient(id);
+
+     selectClient.Delete();
+  //   selectClient.DeleteFromJoin();
+     return View();
+  }
+
  // [HttpPost("/clients/update")]
  //    public ActionResult Update(int id)
  //    {
@@ -163,7 +174,8 @@ public ActionResult Edit(int id)
        Client selectClient = Client.FindClient(id);
        List<Stylist> foundStylist = Client.GetStylistByClient(id);
 
-  selectClient.Delete();
+       selectClient.Delete();
+       selectClient.DeleteFromJoin();
        return View(foundStylist);
     }
 

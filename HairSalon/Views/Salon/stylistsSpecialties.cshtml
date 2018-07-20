@@ -10,12 +10,14 @@
         <tr>
           <th>Specialty No.</th>
           <th>NAME</th>
+          <th>Delete</th>
         </tr>
         @foreach(var specialty in Model["SpecialtyList"])
         {
         <tr>
           <td>@specialty.GetSpecialtyId()</td>
           <td>@specialty.GetSpecialtyName()</td>
+          <td><a href="/clients/@specialty.GetSpecialtyId()/delete">Delete</a></td>
         </tr>
         }
       </table>

@@ -194,6 +194,29 @@ namespace Salon.Models
   }
 }
 
+
+public void DeleteFromJoin()
+{
+MySqlConnection conn = DB.Connection();
+conn.Open();
+
+var cmd = conn.CreateCommand() as MySqlCommand;
+cmd.CommandText = @"DELETE FROM stylists_clients WHERE client_id = @thisId;";
+
+MySqlParameter searchId = new MySqlParameter();
+searchId.ParameterName = "@thisId";
+searchId.Value = _id;
+cmd.Parameters.Add(searchId);
+
+cmd.ExecuteNonQuery();
+
+conn.Close();
+if (conn != null)
+{
+  conn.Dispose();
+}
+}
+
 public static List<Stylist> GetStylistByClient(int id)
 {
   MySqlConnection conn = DB.Connection();

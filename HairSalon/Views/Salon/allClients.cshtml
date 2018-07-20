@@ -9,9 +9,10 @@
       <p>List of clients</p>
       <table>
       <tr>
-        <th>Client Number</th>
+        <th>Client No.</th>
         <th>NAME </th>
         <th>Stylist</th>
+        <th>Update</th>
         <th>Remove</th>
       </tr>
       @foreach(var client in Model)
@@ -22,6 +23,7 @@
         <td>@client.GetId()</td>
         <td>@client.GetName()</td>
         <td>@client.GetStylistId()</td>
+        <td><a href="/clients/@client.GetId()/update">Edit</a></td>
         <td><a href="/clients/@client.GetId()/delete">Delete</a></td>
       </tr>
       }

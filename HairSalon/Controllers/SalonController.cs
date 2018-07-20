@@ -65,37 +65,46 @@ public ActionResult Edit()
         return View(allClient);
     }
 
-[HttpGet("/clients/{id}/delete")]
-public ActionResult Delete(int id)
-{
-   Client selectClient = Client.FindClient(id);
-   int stylistOutput = selectClient.GetStylistId();
-    List<Client> remainClient = Client.Find(stylistOutput);
 
-    selectClient.Delete();
-  //  Stylist thisStylist = Stylist.Find(id);
+[HttpGet("/clients/{id}/update")]
+   public ActionResult EditClientsAll(int id)
+   {
 
-    //Client.Find(id);
-  //  return RedirectToAction("ClientList", Client.Find(id));
-   return View(remainClient);
-}
+      // Stylist thisStylist = Stylist.Find(id);
+        List<Stylist> thisStylist = Stylist.GetAll();
+       return View(thisStylist);
+   }
+
+ [HttpPost("/clients/update")]
+    public ActionResult Update(int id)
+    {
+      // Stylist thisStylist = Stylist.Find(id);
+      // thisStylist.Edit(Request.Form["updatename"]);
+      // return RedirectToAction("Index");
+      Client selectClient = Client.FindClient(id);
+      selectClient.Edit(Request.Form["new-client"], 1, Request.Form["new-stylistName"]);
+
+      List<Client> allClient = Client.GetAll();
+      return View("allClients", allClient);
+    }
 
 
+    [HttpGet("/clients/{id}/delete")]
+    public ActionResult Delete(int id)
+    {
+       Client selectClient = Client.FindClient(id);
+       int stylistOutput = selectClient.GetStylistId();
+        List<Client> remainClient = Client.Find(stylistOutput);
 
-// [HttpGet("/salon/{id}/update")]
-//    public ActionResult UpdateForm(int id)
-//    {
-//        Stylist thisStylist = Stylist.Find(id);
-//        return View(thisStylist);
-//    }
-//    [HttpPost("/salon/{id}/update")]
-//     public ActionResult Update(int id)
-//     {
-//         Stylist thisStylist = Stylist.Find(id);
-//         thisStylist.Edit(Request.Form["updatename"]);
-//         return RedirectToAction("Index");
-//     }
-//
+        selectClient.Delete();
+      //  Stylist thisStylist = Stylist.Find(id);
+
+        //Client.Find(id);
+      //  return RedirectToAction("ClientList", Client.Find(id));
+       return View(remainClient);
+    }
+
+
 //     [HttpGet("/items/{id}/delete")]
 //    public ActionResult Delete(int id)
 //    {

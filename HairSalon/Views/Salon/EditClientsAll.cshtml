@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+<div class="center">
+  <div class="move">
+    <div class="test">
+    <p>Enter new Client</p>
+      <form action="/clients/update" method="post">
+        <div class='form-group'>
+          <label for='new-client'>Enter Name</label>
+          <input id='new-client' name='new-client' class='form-control' type='text'>
+        </div>
+
+        <div class="form-group">
+        @foreach(var stylist in Model)
+        {
+        <input type="checkbox" name="new-stylistName" value="@stylist.GetName()">@stylist.GetName()<br>
+
+        }
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

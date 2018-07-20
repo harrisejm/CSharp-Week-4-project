@@ -190,8 +190,6 @@ namespace Salon.Models
   searchId.Value = _id;
   cmd.Parameters.Add(searchId);
 
-
-
   cmd.ExecuteNonQuery();
 
   conn.Close();
@@ -200,6 +198,49 @@ namespace Salon.Models
     conn.Dispose();
   }
 }
+////delete sytlist name
+public void Edit(string newName, int newStylistId, string newStylistName)
+{
+  MySqlConnection conn = DB.Connection();
+  conn.Open();
+  var cmd = conn.CreateCommand() as MySqlCommand;
+  cmd.CommandText = @"UPDATE clients SET name = @name, stylist_id = @stylist_id, stylist_Name = @stylist_Name WHERE id = @clientId;";
+
+  MySqlParameter changeName = new MySqlParameter();
+  changeName.ParameterName = "@name";
+  changeName.Value = newName;
+  cmd.Parameters.Add(changeName);
+
+  MySqlParameter changeStylistId = new MySqlParameter();
+  changeStylistId.ParameterName = "@stylist_id";
+  changeStylistId.Value = newStylistId;
+  cmd.Parameters.Add(changeStylistId);
+
+  MySqlParameter changeStylistName = new MySqlParameter();
+  changeStylistName.ParameterName = "@stylist_Name";
+  changeStylistName.Value = newStylistName;
+  cmd.Parameters.Add(changeStylistName);
+
+  MySqlParameter clientId = new MySqlParameter();
+  clientId.ParameterName = "@clientId";
+  clientId.Value = _id;
+  cmd.Parameters.Add(clientId);
+
+  cmd.ExecuteNonQuery();
+
+_name = newName;
+_stylistId = newStylistId;
+_stylistName = newStylistName;
+
+
+  conn.Close();
+  if (conn != null)
+  {
+    conn.Dispose();
+  }
+}
+
+
 
   }
 }

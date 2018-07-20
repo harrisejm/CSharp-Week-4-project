@@ -5,7 +5,7 @@
   <div class="move">
     <div class="test">
 
-      <h1 class="name">@Model[0].GetStylistName()</h1>
+      <h1 class="name">@Model["StylistName"].GetName()</h1>
       <p>List of clients</p>
       <table>
       <tr>
@@ -14,20 +14,20 @@
         <th>Stylist</th>
         <th>Remove</th>
       </tr>
-      @foreach(var client in Model)
+      @foreach(var client in Model["clientList"])
       {
       @if (client.GetName() != "Welcome")
       {
       <tr>
         <td>@client.GetId()</td>
         <td>@client.GetName()</td>
-        <td>@client.GetStylistId()</td>
+        <td>@client.GetId()</td>
         <td><a href="/clients/@client.GetId()/delete">Delete</a></td>
       </tr>
       }
       }
       </table>
-      <p><a href='/clients/@Model[0].GetStylistId()/new'>Add new client<a/></P>
+      <p><a href='/clients/@Model["StylistName"]GetId()/new'>Add new client<a/></P>
       <p><a href='/salon'>Back to stylists<a/></P>
     </div>
   </div>

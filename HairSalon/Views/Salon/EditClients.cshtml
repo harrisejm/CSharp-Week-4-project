@@ -10,14 +10,7 @@
           <label for='new-client'>Enter Name</label>
           <input id='new-client' name='new-client' class='form-control' type='text'>
         </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="new-stylistId" value="@Model.GetId()" checked> Stylist: @Model.GetName()
-          </label>
-          <label>
-            <input type="radio" name="new-stylistName" value="@Model.GetName()" checked> Stylist No.: @Model.GetId()
-          </label>
-        </div>
+
         <button type="submit">Submit</button>
       </form>
     </div>

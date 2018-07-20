@@ -10,6 +10,7 @@
           <th>Employee No.</th>
           <th>NAME</th>
           <th>Clients</th>
+          <th>Specialties</th>
         </tr>
         @foreach(var stylist in Model)
         {
@@ -17,6 +18,8 @@
           <td>@stylist.GetId()</td>
           <td>@stylist.GetName()</td>
           <td><a href='/clients/@stylist.GetId()/all'>Client list<a/></td>
+          <td><a href='/Specialty/@stylist.GetId()/all'>Specialty list<a/></td>
+
         </tr>
         }
       </table>

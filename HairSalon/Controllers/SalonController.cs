@@ -93,24 +93,21 @@ public ActionResult Edit()
     }
 
     [HttpGet("/salon/specialty/new")]
-    public ActionResult CreateForm()
+    public ActionResult addSpecialty()
     {
-        return View();
+      return View();
     }
 
-    [HttpPost("//salon/specialty/add")]
-    public ActionResult Create()
+    [HttpPost("/salon/specialty")]
+    public ActionResult CreateSpecialty()
     {
-     Stylist newStylist = new Stylist(Request.Form["new-stylist"]);
-     newStylist.Save();
-     List<Stylist> allStylists = Stylist.GetAll();
-    //  Client newClient = new Client("Welcome", allStylists[allStylists.Count-1].GetId(), Request.Form["new-stylist"]);
-     Client newClient = new Client("Welcome");
+    Specialty newSpecialty = new Specialty(Request.Form["new-specialty"]);
+     newSpecialty.Save();
+     List<Specialty> allSpecialty = Specialty.GetAll();
 
 
-     newClient.Save();
+   return View("Specialties", allSpecialty);
 
-    return View("Index", allStylists);
   }
 
 

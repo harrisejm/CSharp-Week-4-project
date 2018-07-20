@@ -75,8 +75,8 @@ public void Save()
   conn.Open();
 
   var cmd = conn.CreateCommand() as MySqlCommand;
-  cmd.CommandText = @"INSERT INTO specialties (name) VALUES (@name);";
-  cmd.Parameters.Add(new MySqlParameter("@name", _name));
+  cmd.CommandText = @"INSERT INTO specialties (specialty) VALUES (@specialty);";
+  cmd.Parameters.Add(new MySqlParameter("@specialty", _name));
 
   cmd.ExecuteNonQuery();
   _id = (int) cmd.LastInsertedId;

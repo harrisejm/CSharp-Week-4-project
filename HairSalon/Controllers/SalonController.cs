@@ -58,6 +58,13 @@ public ActionResult Edit()
   return View("ClientList", Client.Find(int.Parse(Request.Form["new-stylistId"])));
 }
 
+[HttpGet("/clients/list/all")]
+    public ActionResult allClients()
+    {
+        List<Client> allClient = Client.GetAll();
+        return View(allClient);
+    }
+
 [HttpGet("/clients/{id}/delete")]
 public ActionResult Delete(int id)
 {

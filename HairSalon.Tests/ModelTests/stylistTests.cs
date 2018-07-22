@@ -13,6 +13,7 @@ namespace Salon.Tests
       Stylist.DeleteAll();
       Client.DeleteAll();
       Client.DeleteAllStylistClient();
+      Specialty.DeleteAllstylistsSpecialties();
     }
     public stylistTests()
     {
@@ -92,7 +93,6 @@ namespace Salon.Tests
       Client testClient1 = new Client("test1");
       testClient1.Save();
       Stylist.AddNewClient(testStylist1.GetId(), testClient1.GetId());
-    //  List<Stylist> testStylist = Client.GetStylistByClient(testClient1.GetId());
       List<Client> testClient = Stylist.GetClientsByStylist(testStylist1.GetId());
       Assert.AreEqual(testClient1.GetId(), testClient[0].GetId());
     }

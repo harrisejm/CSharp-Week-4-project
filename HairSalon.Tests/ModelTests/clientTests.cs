@@ -13,6 +13,7 @@ namespace Salon.Tests
       Client.DeleteAll();
       Stylist.DeleteAll();
       Client.DeleteAllStylistClient();
+      Specialty.DeleteAllstylistsSpecialties();
     }
     public clientTests()
     {

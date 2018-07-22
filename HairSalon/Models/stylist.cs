@@ -220,7 +220,35 @@ namespace Salon.Models
       }
     }
 
+    public void Edit(int id, string newName)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE stylists SET name = @name WHERE id = @stylistId;";
 
+      MySqlParameter stylistId = new MySqlParameter();
+      stylistId.ParameterName = "@stylistId";
+      stylistId.Value = id;
+      cmd.Parameters.Add(stylistId);
+
+      MySqlParameter changeName = new MySqlParameter();
+      changeName.ParameterName = "@name";
+      changeName.Value = newName;
+      cmd.Parameters.Add(changeName);
+
+
+      cmd.ExecuteNonQuery();
+
+    _name = newName;
+    _id = id;
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
 
 
 

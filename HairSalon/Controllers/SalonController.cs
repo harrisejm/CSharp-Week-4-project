@@ -87,14 +87,61 @@ public ActionResult Edit(int id)
      Client foundClient = Client.FindClient(id);
      return View(foundClient);
    }
-[HttpPost("/clients/{id}/name")]
+//
+[HttpPost("/clients/{id}/name/new")]
 public ActionResult EditClientNameFinal(int id)
 {
-//  Client foundClient = Client.FindClient(id);
-  Client.Edit(id, Request.Form["new-client"]);
+  Client foundClient = Client.FindClient(id);
+  foundClient.Edit(id, Request.Form["new-client"]);
 
-  return View(foundClient);
+  Dictionary<string, object> model = new Dictionary<string, object>();
+
+  List<Stylist> stylistMain = Client.GetStylistByClient(id);
+  Stylist selectedStylist = stylistMain[0];
+  int stylistId = selectedStylist.GetId();
+
+  List<Client> selectedClients = Stylist.GetClientsByStylist(stylistId);
+
+  model.Add("clientList", selectedClients);
+  model.Add("StylistName", selectedStylist);
+
+  return View("ClientList", model);
 }
+//
+//Change stylist name
+[HttpGet("/stylist/{id}/stylist")]
+   public ActionResult EditStylistName(int id)
+   {
+     Stylist foundStylist = Stylist.Find(id);
+     return View(foundStylist);
+   }
+
+   [HttpPost("/stylist/{id}/name/new")]
+   public ActionResult EditStylsitNameFinal(int id)
+   {
+     Stylist foundStylist = Stylist.Find(id);
+     foundStylist.Edit(id, Request.Form["new-stylist"]);
+
+    // Dictionary<string, object> model = new Dictionary<string, object>();
+
+  //   List<Stylist> stylistMain = Client.GetStylistByClient(id);
+    // Stylist selectedStylist = stylistMain[0];
+    // int stylistId = selectedStylist.GetId();
+
+  //   List<Client> selectedClients = Stylist.GetClientsByStylist(stylistId);
+
+    // model.Add("clientList", selectedClients);
+  //   model.Add("StylistName", selectedStylist);
+      List<Stylist> allStylists = Stylist.GetAll();
+
+     return View("Index", allStylists);
+   }
+
+
+
+
+
+
 
     // [HttpPost("/clients/update")]
     //    public ActionResult Update(int id)
@@ -108,14 +155,6 @@ public ActionResult EditClientNameFinal(int id)
     //      List<Client> allClient = Client.GetAll();
     //      return View("allClients", allClient);
     //    }
-
-
-
-
-
-
-
-
 
 
 

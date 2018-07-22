@@ -260,8 +260,6 @@ public void Edit(int id, string newName)
   var cmd = conn.CreateCommand() as MySqlCommand;
   cmd.CommandText = @"UPDATE clients SET name = @name WHERE id = @clientId;";
 
-  // cmd.CommandText = @"UPDATE clients SET name = @name, stylist_id = @stylist_id, stylist_Name = @stylist_Name WHERE id = @clientId;";
-
   MySqlParameter clientId = new MySqlParameter();
   clientId.ParameterName = "@clientId";
   clientId.Value = id;
@@ -272,15 +270,6 @@ public void Edit(int id, string newName)
   changeName.Value = newName;
   cmd.Parameters.Add(changeName);
 
-  // MySqlParameter changeStylistId = new MySqlParameter();
-  // changeStylistId.ParameterName = "@stylist_id";
-  // changeStylistId.Value = newStylistId;
-  // cmd.Parameters.Add(changeStylistId);
-  //
-  // MySqlParameter changeStylistName = new MySqlParameter();
-  // changeStylistName.ParameterName = "@stylist_Name";
-  // changeStylistName.Value = newStylistName;
-  // cmd.Parameters.Add(changeStylistName);
 
   cmd.ExecuteNonQuery();
 

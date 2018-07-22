@@ -49,7 +49,7 @@ namespace Salon.Tests
           Assert.AreEqual(testId, result);
         }
 
-//test Save()
+//test getAll()
     [TestMethod]
     public void GetAll_DescriptionEmptyAtFirst_0()
     {
@@ -57,7 +57,7 @@ namespace Salon.Tests
 
       Assert.AreEqual(0, result);
     }
-
+//test Save
     [TestMethod]
     public void Save_SavesToDatabase_ClientList()
     {
@@ -69,7 +69,7 @@ namespace Salon.Tests
 
       CollectionAssert.AreEqual(testList, result);
     }
-  //test Save()
+  //test assigns Id when saved()
     [TestMethod]
     public void Save_DatabaseAssignsIdToDescription_Id()
     {

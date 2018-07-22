@@ -50,6 +50,41 @@ namespace Salon.Tests
       Assert.AreEqual(testId, result);
     }
 
+    //test getAll()
+        [TestMethod]
+        public void GetAll_EmptyAtFirst_0()
+        {
+          int result = Specialty.GetAll().Count;
+
+          Assert.AreEqual(0, result);
+        }
+    //test Save
+        [TestMethod]
+        public void Save_SavesToDatabase_ClientList()
+        {
+          Client testClient = new Client("Eddie");
+
+          testClient.Save();
+          List<Client> result = Client.GetAll();
+          List<Client> testList = new List<Client>{testClient};
+
+          CollectionAssert.AreEqual(testList, result);
+        }
+      //test assigns Id when saved()
+        [TestMethod]
+        public void Save_DatabaseAssignsIdToDescription_Id()
+        {
+          Client testClient = new Client("Jimmy");
+          testClient.Save();
+
+          Client savedClient = Client.GetAll()[0];
+
+          int result = savedClient.GetId();
+          int testId = testClient.GetId();
+
+          Assert.AreEqual(testId, result);
+        }
+
 
   }
 }

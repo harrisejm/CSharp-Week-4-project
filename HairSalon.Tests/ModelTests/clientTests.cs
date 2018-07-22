@@ -18,6 +18,36 @@ namespace Salon.Tests
     {
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=eddie_harris_test;";
     }
+    //getName
+        [TestMethod]
+        public void GetNamefromClient()
+        {
+          Client testClient = new Client("Jimmy");
+          testClient.Save();
+
+          Client savedClient = Client.GetAll()[0];
+
+          string resultName = savedClient.GetName();
+          string testName = testClient.GetName();
+
+          Assert.AreEqual(testName, resultName);
+        }
+
+    //getId
+        [TestMethod]
+        public void GetIdfromClient()
+        {
+          Client testClient = new Client("Jimmy");
+          testClient.Save();
+
+          Client savedClient = Client.GetAll()[0];
+
+          int result = savedClient.GetId();
+          int testId = testClient.GetId();
+
+          Assert.AreEqual(testId, result);
+        }
+
 //test Save()
     [TestMethod]
     public void GetAll_DescriptionEmptyAtFirst_0()

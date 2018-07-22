@@ -55,18 +55,17 @@ namespace Salon.Tests
         public void GetAll_EmptyAtFirst_0()
         {
           int result = Specialty.GetAll().Count;
-
           Assert.AreEqual(0, result);
         }
     //test Save
         [TestMethod]
         public void Save_SavesToDatabase_ClientList()
         {
-          Client testClient = new Client("Eddie");
+          Specialty testSpecialty = new Specialty("Eddie");
 
-          testClient.Save();
-          List<Client> result = Client.GetAll();
-          List<Client> testList = new List<Client>{testClient};
+          testSpecialty.Save();
+          List<Specialty> result = Specialty.GetAll();
+          List<Specialty> testList = new List<Specialty>{testSpecialty};
 
           CollectionAssert.AreEqual(testList, result);
         }
@@ -74,16 +73,44 @@ namespace Salon.Tests
         [TestMethod]
         public void Save_DatabaseAssignsIdToDescription_Id()
         {
-          Client testClient = new Client("Jimmy");
-          testClient.Save();
+          Specialty testSpecialty = new Specialty("Jimmy");
+          testSpecialty.Save();
 
-          Client savedClient = Client.GetAll()[0];
+          Specialty savedSpecialty = Specialty.GetAll()[0];
 
-          int result = savedClient.GetId();
-          int testId = testClient.GetId();
+          int result = savedSpecialty.GetSpecialtyId();
+          int testId = testSpecialty.GetSpecialtyId();
 
           Assert.AreEqual(testId, result);
         }
+//add to join table stylists_specialties
+        [TestMethod]
+        public void Add_AddtoStylists_clients()
+        {
+          Stylist testStylist1 = new Stylist("testName");
+          testStylist1.Save();
+          Specialty testSpecialty1 = new Specialty("test1");
+          testSpecialty1.Save();
+
+          Specialty.AddNewSpecialtyJoinStylist(testStylist1.GetId(), testSpecialty1.GetSpecialtyId());
+          List<Stylist> testSpecialty = Specialty.GetStylistBySpecialty(testSpecialty1.GetSpecialtyId());
+
+          Assert.AreEqual(1, testSpecialty.Count);
+        }
+
+        //test Delete()
+           [TestMethod]
+           public void Delete_DeleteClientInDatabase()
+           {
+             Client testClient1 = new Client("test1");
+             testClient1.Save();
+             List<Client> allClients = Client.GetAll();
+             allClients[0].Delete();
+             List<Client> allClientsDelete = Client.GetAll();
+
+             Assert.AreEqual(0, allClientsDelete.Count);
+           }
+
 
 
   }

@@ -57,7 +57,7 @@ namespace Salon.Tests
 
       Assert.AreEqual(0, result);
     }
-//test Save
+//test Saves
     [TestMethod]
     public void Save_SavesToDatabase_ClientList()
     {

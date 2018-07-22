@@ -63,6 +63,21 @@ namespace Salon.Tests
       CollectionAssert.AreEqual(testList, result);
     }
 
+    //test assigns Id when saved()
+      [TestMethod]
+      public void Save_DatabaseAssignsIdToDescription_Id()
+      {
+        Stylist testStylist = new Stylist("Jimmy");
+        testStylist.Save();
+
+        Stylist savedStylist = Stylist.GetAll()[0];
+
+        int result = savedStylist.GetId();
+        int testId = testStylist.GetId();
+
+        Assert.AreEqual(testId, result);
+      }
+
     //get all
     [TestMethod]
     public void GetAll_DescriptionEmptyAtFirst_0()

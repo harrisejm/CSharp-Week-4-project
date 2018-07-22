@@ -8,13 +8,17 @@
       <table>
         <tr>
           <th>Specialty No.</th>
-          <th>NAME</th>
+          <th>NAME (edit)</th>
+          <th>Stylists</th>
+          <th>Remove</th>
         </tr>
         @foreach(var specialty in Model)
         {
         <tr>
           <td>@specialty.GetSpecialtyId()</td>
-          <td>@specialty.GetSpecialtyName()</td>
+        <td><a href="/salon/specialy/@specialty.GetSpecialtyId()/name">@specialty.GetSpecialtyName()</a></td>
+          <td>Stylist List</td>
+          <td><a href="/specialty/@specialty.GetSpecialtyId()/delete">Delete</a></td>
         </tr>
         }
       </table>

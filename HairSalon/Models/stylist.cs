@@ -97,6 +97,29 @@ namespace Salon.Models
       }
     }
 
+    public void Delete()
+  {
+    MySqlConnection conn = DB.Connection();
+    conn.Open();
+
+    var cmd = conn.CreateCommand() as MySqlCommand;
+    cmd.CommandText = @"DELETE FROM stylists WHERE id = @thisId;";
+
+    MySqlParameter searchId = new MySqlParameter();
+    searchId.ParameterName = "@thisId";
+    searchId.Value = _id;
+    cmd.Parameters.Add(searchId);
+
+    cmd.ExecuteNonQuery();
+
+    conn.Close();
+    if (conn != null)
+    {
+      conn.Dispose();
+    }
+  }
+
+
     public static Stylist Find(int id)
     {
       MySqlConnection conn = DB.Connection();
@@ -248,6 +271,29 @@ namespace Salon.Models
       {
         conn.Dispose();
       }
+    }
+
+
+    public void DeleteFromJoin()
+    {
+    MySqlConnection conn = DB.Connection();
+    conn.Open();
+
+    var cmd = conn.CreateCommand() as MySqlCommand;
+    cmd.CommandText = @"DELETE FROM stylists_clients WHERE stylist_id = @thisId;";
+
+    MySqlParameter searchId = new MySqlParameter();
+    searchId.ParameterName = "@thisId";
+    searchId.Value = _id;
+    cmd.Parameters.Add(searchId);
+
+    cmd.ExecuteNonQuery();
+
+    conn.Close();
+    if (conn != null)
+    {
+    conn.Dispose();
+    }
     }
 
 

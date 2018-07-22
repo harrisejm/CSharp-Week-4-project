@@ -122,26 +122,10 @@ public ActionResult EditClientNameFinal(int id)
      Stylist foundStylist = Stylist.Find(id);
      foundStylist.Edit(id, Request.Form["new-stylist"]);
 
-    // Dictionary<string, object> model = new Dictionary<string, object>();
-
-  //   List<Stylist> stylistMain = Client.GetStylistByClient(id);
-    // Stylist selectedStylist = stylistMain[0];
-    // int stylistId = selectedStylist.GetId();
-
-  //   List<Client> selectedClients = Stylist.GetClientsByStylist(stylistId);
-
-    // model.Add("clientList", selectedClients);
-  //   model.Add("StylistName", selectedStylist);
       List<Stylist> allStylists = Stylist.GetAll();
 
      return View("Index", allStylists);
    }
-
-
-
-
-
-
 
     // [HttpPost("/clients/update")]
     //    public ActionResult Update(int id)
@@ -261,30 +245,39 @@ Specialty.AddNewSpecialtyJoinStylist(id, int.Parse(Request.Form["new-specialty"]
 
     return View("stylistsSpecialties", model);
   }
+///change specialty
+  [HttpGet("/salon/specialty/{id}/name")]
+     public ActionResult EditSpecialty(int id)
+     {
+       Specialty foundSpecialty = Specialty.Find(id);
+       return View(foundSpecialty);
+     }
+
+     [HttpPost("/salon/specialty/{id}/name/new")]
+     public ActionResult EditSpecialtyNameFinal(int id)
+     {
+       Specialty foundSpecialty = Specialty.Find(id);
+       foundSpecialty.Edit(id, Request.Form["new-stylist"]);
+
+        List<Stylist> allStylists = Stylist.GetAll();
+
+       return View("Index", allStylists);
+     }
 
 
-////
-//   [HttpPost("/salon/specialty")]
-//   public ActionResult CreateSpecialty()
-//   {
-//   Specialty newSpecialty = new Specialty(Request.Form["new-specialty"]);
-//    Specialty.AddNewSpecialtyJoinStylist(newSpecialty.GetId());
-//    List<Specialty> allSpecialty = Specialty.GetAll();
-//  return View("Specialties", allSpecialty);
-// }
 
 
+////delete
+//delete ALL
   [HttpGet("/salon/specialty/{id}/delete")]
   public ActionResult DeleteSpecialty(int id)
   {
-     Specialty selectedSpecialty = Specialty.FindSpeciality(id);
+     Specialty selectedSpecialty = Specialty.Find(id);
      List<Stylist> foundStylist = Specialty.GetStylistBySpecialty(id);
      selectedSpecialty.DeleteFromJoin();
      return View(foundStylist);
 
   }
-
-
 
     [HttpGet("/clients/{id}/delete")]
     public ActionResult Delete(int id)
@@ -297,6 +290,28 @@ Specialty.AddNewSpecialtyJoinStylist(id, int.Parse(Request.Form["new-specialty"]
        return View(foundStylist);
     }
 
+    [HttpGet("/stylist/{id}/delete")]
+    public ActionResult DeleteStylist(int id)
+    {
+       Stylist selectStylist = Stylist.Find(id);
+      // List<Stylist> foundStylist = Client.GetStylistByClient(id);
+
+       selectStylist.Delete();
+       selectStylist.DeleteFromJoin();
+    //   selectClient.DeleteFromJoin();
+       return View();
+    }
+
+    [HttpGet("/specialty/{id}/delete")]
+    public ActionResult DeleteSpecialtyFinal(int id)
+    {
+        Specialty selectedSpecialty = Specialty.Find(id);
+      // // List<Stylist> foundStylist = Client.GetStylistByClient(id);
+      //
+       selectedSpecialty.Delete();
+        selectedSpecialty.DeleteFromJoin();
+       return View();
+    }
 
 
 

@@ -87,37 +87,34 @@ public void Save()
   }
 }
 
-public static Specialty FindSpeciality(int id)
-{
-  MySqlConnection conn = DB.Connection();
-  conn.Open();
-  var cmd = conn.CreateCommand() as MySqlCommand;
-  cmd.CommandText = @"SELECT * FROM specialties WHERE id = @thisId;";
-  MySqlParameter thisId = new MySqlParameter();
-  thisId.ParameterName = "@thisId";
-  thisId.Value = id;
-  cmd.Parameters.Add(thisId);
-  var rdr = cmd.ExecuteReader() as MySqlDataReader;
-
-  int specialtyId = 0;
-  string specialtyName = "";
-
-
-  while (rdr.Read())
-  {
-    specialtyId = rdr.GetInt32(0);
-    specialtyId = rdr.GetInt32(0);
-
-  }
-  Specialty foundSpecialty = new Specialty(specialtyName, specialtyId);
-
-  conn.Close();
-  if (conn != null)
-  {
-    conn.Dispose();
-  }
-  return foundSpecialty;
-}
+// public static Specialty FindSpeciality(int id)
+// {
+//   MySqlConnection conn = DB.Connection();
+//   conn.Open();
+//   var cmd = conn.CreateCommand() as MySqlCommand;
+//   cmd.CommandText = @"SELECT * FROM specialties WHERE id = @thisId;";
+//   MySqlParameter thisId = new MySqlParameter();
+//   thisId.ParameterName = "@thisId";
+//   thisId.Value = id;
+//   cmd.Parameters.Add(thisId);
+//   var rdr = cmd.ExecuteReader() as MySqlDataReader;
+//   int specialtyId = 0;
+//   string specialtyName = "";
+//
+//   while (rdr.Read())
+//   {
+//     specialtyId = rdr.GetInt32(0);
+//     specialtyId = rdr.GetInt32(0);
+//   }
+//   Specialty foundSpecialty = new Specialty(specialtyName, specialtyId);
+//
+//   conn.Close();
+//   if (conn != null)
+//   {
+//     conn.Dispose();
+//   }
+//   return foundSpecialty;
+// }
 
 
 public static List<Stylist> GetStylistBySpecialty(int id)
@@ -226,7 +223,34 @@ conn.Dispose();
 }
 }
 
+public static Specialty Find(int id)
+{
+  MySqlConnection conn = DB.Connection();
+  conn.Open();
+  var cmd = conn.CreateCommand() as MySqlCommand;
+  cmd.CommandText = @"SELECT * FROM specialties WHERE id = @thisId;";
+  MySqlParameter thisId = new MySqlParameter();
+  thisId.ParameterName = "@thisId";
+  thisId.Value = id;
+  cmd.Parameters.Add(thisId);
+  var rdr = cmd.ExecuteReader() as MySqlDataReader;
+  int specialtyId = 0;
+  string specialtyName = "";
 
+  while (rdr.Read())
+  {
+    specialtyId = rdr.GetInt32(0);
+    specialtyName = rdr.GetString(1);
+  }
+  Specialty foundSpecialty = new Specialty(specialtyName, specialtyId);
+
+  conn.Close();
+  if (conn != null)
+  {
+    conn.Dispose();
+  }
+  return foundSpecialty;
+}
 
 
 

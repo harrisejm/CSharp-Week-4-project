@@ -1,0 +1,34 @@
+
+      @{
+        Layout = "_Layout";
+      }
+      <div class="center">
+        <div class="move">
+          <div class="test">
+                <h1 class="name">@Model["SpecialtyList"].GetSpecialtyName()</h1>
+            <p>List of stylists with the specialty @Model["SpecialtyList"].GetSpecialtyName()</p>
+            <table>
+              <tr>
+                <th>No.</th>
+                <th>NAME (edit)</th>
+                <th>Clients</th>
+                <th>Specialties</th>
+
+              </tr>
+              @foreach(var stylist in Model["StylistName"])
+              {
+              <tr>
+              <td>@stylist.GetId()</td>
+              <td><a href='/stylist/@stylist.GetId()/stylist'>@stylist.GetName()</a></td>
+              <td><a href='/clients/@stylist.GetId()/all'>Client list<a/></td>
+              <td><a href='/specialty/@stylist.GetId()/all'>Specialty list<a/></td>
+
+              </tr>
+              }
+            </table>
+
+<p><a href='/salon/specialty'>View List of Specialties<a/></p>
+            <p><a href='/'>Home<a/></p>
+          </div>
+        </div>
+      </div>

@@ -12,12 +12,13 @@ namespace Salon.Tests
     {
       Stylist.DeleteAll();
       Client.DeleteAll();
+      Client.DeleteAllStylistClient();
     }
     public stylistTests()
     {
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=eddie_harris_test;";
     }
-
+//get all
     [TestMethod]
     public void GetAll_DescriptionEmptyAtFirst_0()
     {
@@ -25,7 +26,7 @@ namespace Salon.Tests
 
       Assert.AreEqual(0, result);
     }
-
+// save
     [TestMethod]
     public void Save_SavesToDatabase_StylistList()
     {
@@ -37,7 +38,7 @@ namespace Salon.Tests
 
       CollectionAssert.AreEqual(testList, result);
     }
-
+//getId
     [TestMethod]
     public void Save_DatabaseAssignsIdToDescription_Id()
     {
@@ -51,7 +52,7 @@ namespace Salon.Tests
 
       Assert.AreEqual(testId, result);
     }
-
+//Find
     [TestMethod]
     public void Find_FindStylistInDatabase_Description()
     {
@@ -62,5 +63,9 @@ namespace Salon.Tests
 
       Assert.AreEqual(testStylist, foundStylist);
     }
+
+
+
+
   }
 }

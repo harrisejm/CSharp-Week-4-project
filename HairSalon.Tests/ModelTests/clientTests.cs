@@ -12,6 +12,7 @@ namespace Salon.Tests
     {
       Client.DeleteAll();
       Stylist.DeleteAll();
+      Client.DeleteAllStylistClient();
     }
     public clientTests()
     {
@@ -29,7 +30,7 @@ namespace Salon.Tests
     [TestMethod]
     public void Save_SavesToDatabase_ClientList()
     {
-      Client testClient = new Client("Eddie", 1, "test");
+      Client testClient = new Client("Eddie");
 
       testClient.Save();
       List<Client> result = Client.GetAll();
@@ -41,7 +42,7 @@ namespace Salon.Tests
     [TestMethod]
     public void Save_DatabaseAssignsIdToDescription_Id()
     {
-      Client testClient = new Client("Jimmy", 1, "test");
+      Client testClient = new Client("Jimmy");
       testClient.Save();
 
       Client savedClient = Client.GetAll()[0];
@@ -51,23 +52,23 @@ namespace Salon.Tests
 
       Assert.AreEqual(testId, result);
     }
-  //test Find()
+  //test FindClient()
     [TestMethod]
     public void Find_FindClientInDatabase_Description()
     {
-      Client testClient = new Client("test", 1, "test");
+      Client testClient = new Client("test");
       testClient.Save();
 
       List<Client> allClients = Client.GetAll();
-      List<Client> foundClient = Client.Find(testClient.GetStylistId());
+      Client foundClient = Client.FindClient(testClient.GetId());
 
-      Assert.AreEqual(Client.GetAll()[0], Client.Find(testClient.GetStylistId())[0]);
+      Assert.AreEqual(allClients[0], foundClient);
     }
  //test Delete()
     [TestMethod]
-    public void Delete_DeleteClientInDatabase_Description()
+    public void Delete_DeleteClientInDatabase()
     {
-      Client testClient1 = new Client("test1", 1, "test2");
+      Client testClient1 = new Client("test1");
       testClient1.Save();
       List<Client> allClients = Client.GetAll();
       allClients[0].Delete();
@@ -75,6 +76,60 @@ namespace Salon.Tests
 
       Assert.AreEqual(0, allClientsDelete.Count);
     }
+//add to join table stylists_clients
+    [TestMethod]
+    public void Add_AddtoStylists_clients()
+    {
+      Stylist testStylist1 = new Stylist("testName");
+      testStylist1.Save();
+      Client testClient1 = new Client("test1");
+      testClient1.Save();
+      Stylist.AddNewClient(testStylist1.GetId(), testClient1.GetId());
+      List<Stylist> testStylist = Client.GetStylistByClient(testClient1.GetId());
+    //  List<Client> testClient = Stylist.GetClientsByStylist(testStylist1.GetId());
+      Assert.AreEqual(1, testStylist.Count);
+    }
+    //join table stylist_client, find by client_id
+    [TestMethod]
+    public void Get_GetStylistFromStylists_clients_byClientId()
+    {
+      Stylist testStylist1 = new Stylist("testName");
+      testStylist1.Save();
+      Client testClient1 = new Client("test1");
+      testClient1.Save();
+      Stylist.AddNewClient(testStylist1.GetId(), testClient1.GetId());
+      List<Stylist> testStylist = Client.GetStylistByClient(testClient1.GetId());
+    //  List<Client> testClient = Stylist.GetClientsByStylist(testStylist1.GetId());
+      Assert.AreEqual(testStylist1.GetId(), testStylist[0].GetId());
+    }
+
+//Delete from Join table stylists_clients by client Id
+    [TestMethod]
+    public void Delete_DeleteFromStylists_clients_byClientId()
+    {
+      Stylist testStylist1 = new Stylist("testName");
+      testStylist1.Save();
+      Client testClient1 = new Client("test1");
+      testClient1.Save();
+      Stylist.AddNewClient(testStylist1.GetId(), testClient1.GetId());
+      testClient1.DeleteFromJoin();
+
+      List<Stylist> testStylist = Client.GetStylistByClient(testClient1.GetId());
+    //  List<Client> testClient = Stylist.GetClientsByStylist(testStylist1.GetId());
+      Assert.AreEqual(0, testStylist.Count);
+    }
+
+//Edit client name
+    [TestMethod]
+    public void Edit_EditClientName()
+    {
+      Client testClient = new Client("testName");
+      testClient.Save();
+      testClient.Edit(testClient.GetId(), "NewTestname");
+      Client foundClient = Client.FindClient(testClient.GetId());
+      Assert.AreEqual("NewTestname", foundClient.GetName());
+    }
+
 
   }
 }

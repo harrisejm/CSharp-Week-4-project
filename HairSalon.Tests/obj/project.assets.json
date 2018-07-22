@@ -10804,11 +10804,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/eddieharris/Desktop/CSharp-Week-3-Project/HairSalon.Tests/HairSalon.Tests.csproj",
+      "projectUniqueName": "/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/HairSalon.Tests.csproj",
       "projectName": "HairSalon.Tests",
-      "projectPath": "/Users/eddieharris/Desktop/CSharp-Week-3-Project/HairSalon.Tests/HairSalon.Tests.csproj",
+      "projectPath": "/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/HairSalon.Tests.csproj",
       "packagesPath": "/Users/eddieharris/.nuget/packages/",
-      "outputPath": "/Users/eddieharris/Desktop/CSharp-Week-3-Project/HairSalon.Tests/obj/",
+      "outputPath": "/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/eddieharris/.nuget/NuGet/NuGet.Config"
@@ -10822,8 +10822,8 @@
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "/Users/eddieharris/Desktop/CSharp-Week-3-Project/HairSalon/HairSalon.csproj": {
-              "projectPath": "/Users/eddieharris/Desktop/CSharp-Week-3-Project/HairSalon/HairSalon.csproj"
+            "/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon/HairSalon.csproj": {
+              "projectPath": "/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon/HairSalon.csproj"
             }
           }
         }

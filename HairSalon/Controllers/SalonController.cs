@@ -263,6 +263,27 @@ Specialty.AddNewSpecialtyJoinStylist(id, int.Parse(Request.Form["new-specialty"]
 
        return View("Specialties", allSpecialties);
      }
+////// view stylists by specialty
+
+[HttpGet("/salon/specialty/{id}/stylist")]
+   public ActionResult ClientsListSpecialty(int id)
+   {
+
+     Dictionary<string, object> model = new Dictionary<string, object>();
+
+     Specialty foundSpecialty = Specialty.Find(id);
+     List<Stylist> foundStylists = Specialty.GetStylistBySpecialty(id);
+
+     model.Add("SpecialtyList", foundSpecialty);
+     model.Add("StylistName", foundStylists);
+
+     return View(model);
+   }
+
+
+
+
+
 
 
 

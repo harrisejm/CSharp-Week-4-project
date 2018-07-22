@@ -47,8 +47,7 @@ namespace Salon.Models
         Client newClient = (Client) otherClient;
         bool idEquality = (this.GetId() == newClient.GetId());
         bool nameEquality = (this.GetName() == newClient.GetName());
-      //  bool stylistEquality = (this.GetStylistId() == newClient.GetStylistId());
-    //    bool stylistNameEquality = (this.GetStylistName() == newClient.GetStylistName());
+
         return (idEquality && nameEquality);
       }
     }
@@ -85,8 +84,6 @@ namespace Salon.Models
       {
         int clientId = rdr.GetInt32(0);
         string clientName = rdr.GetString(1);
-    //    int stylistId = rdr.GetInt32(2);
-    //    string stylistName = rdr.GetString(3);
 
         Client newClient = new Client(clientName, clientId);
 
@@ -114,31 +111,31 @@ namespace Salon.Models
       }
     }
 
-    public static List<Client> Find(int id)
-    {
-      List<Client> findClients = new List<Client> {};
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = " + id + ";";
-
-      var rdr = cmd.ExecuteReader() as MySqlDataReader;
-
-      while (rdr.Read())
-      {
-        int clientId = rdr.GetInt32(0);
-        string clientName = rdr.GetString(1);
-
-        Client foundClient = new Client(clientName, clientId);
-        findClients.Add(foundClient);
-      }
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-      return findClients;
-    }
+    // public static List<Client> Find(int id)
+    // {
+    //   List<Client> findClients = new List<Client> {};
+    //   MySqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+    //   cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = " + id + ";";
+    //
+    //   var rdr = cmd.ExecuteReader() as MySqlDataReader;
+    //
+    //   while (rdr.Read())
+    //   {
+    //     int clientId = rdr.GetInt32(0);
+    //     string clientName = rdr.GetString(1);
+    //
+    //     Client foundClient = new Client(clientName, clientId);
+    //     findClients.Add(foundClient);
+    //   }
+    //   conn.Close();
+    //   if (conn != null)
+    //   {
+    //     conn.Dispose();
+    //   }
+    //   return findClients;
+    // }
 
     public static Client FindClient(int id)
     {
@@ -252,7 +249,7 @@ public static List<Stylist> GetStylistByClient(int id)
 }
 
 
-//delete sytlist name
+//editsytlist name
 public void Edit(int id, string newName)
 {
   MySqlConnection conn = DB.Connection();
@@ -284,6 +281,20 @@ _id = id;
 }
 
 
+
+public static void DeleteAllStylistClient()
+{
+  MySqlConnection conn = DB.Connection();
+  conn.Open();
+  var cmd = conn.CreateCommand() as MySqlCommand;
+  cmd.CommandText = @"DELETE FROM stylists_clients;";
+  cmd.ExecuteNonQuery();
+  conn.Close();
+  if (conn != null)
+  {
+    conn.Dispose();
+  }
+}
 
   }
 }

@@ -25,3 +25,17 @@
 /Users/eddieharris/Desktop/CSharp-Week-3-Project/HairSalon.Tests/bin/Debug/netcoreapp1.1/HairSalon.Tests.pdb
 /Users/eddieharris/Desktop/CSharp-Week-3-Project/HairSalon.Tests/bin/Debug/netcoreapp1.1/HairSalon.dll
 /Users/eddieharris/Desktop/CSharp-Week-3-Project/HairSalon.Tests/bin/Debug/netcoreapp1.1/HairSalon.pdb
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/bin/Debug/netcoreapp1.1/HairSalon.Tests.deps.json
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/bin/Debug/netcoreapp1.1/HairSalon.Tests.runtimeconfig.json
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/bin/Debug/netcoreapp1.1/HairSalon.Tests.runtimeconfig.dev.json
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/obj/Debug/netcoreapp1.1/HairSalon.Tests.csproj.CoreCompileInputs.cache
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/obj/Debug/netcoreapp1.1/HairSalon.Tests.AssemblyInfo.cs
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/obj/Debug/netcoreapp1.1/HairSalon.Tests.dll
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/obj/Debug/netcoreapp1.1/HairSalon.Tests.pdb
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/bin/Debug/netcoreapp1.1/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/bin/Debug/netcoreapp1.1/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/bin/Debug/netcoreapp1.1/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/bin/Debug/netcoreapp1.1/HairSalon.Tests.dll
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/bin/Debug/netcoreapp1.1/HairSalon.Tests.pdb
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/bin/Debug/netcoreapp1.1/HairSalon.dll
+/Users/eddieharris/Desktop/CSharp-Week-4-project/HairSalon.Tests/bin/Debug/netcoreapp1.1/HairSalon.pdb

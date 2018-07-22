@@ -257,11 +257,11 @@ Specialty.AddNewSpecialtyJoinStylist(id, int.Parse(Request.Form["new-specialty"]
      public ActionResult EditSpecialtyNameFinal(int id)
      {
        Specialty foundSpecialty = Specialty.Find(id);
-       foundSpecialty.Edit(id, Request.Form["new-stylist"]);
+       foundSpecialty.Edit(id, Request.Form["new-specialty"]);
 
-        List<Stylist> allStylists = Stylist.GetAll();
+       List<Specialty> allSpecialties = Specialty.GetAll();
 
-       return View("Index", allStylists);
+       return View("Specialties", allSpecialties);
      }
 
 

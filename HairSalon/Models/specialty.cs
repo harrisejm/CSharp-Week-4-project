@@ -253,6 +253,37 @@ public static Specialty Find(int id)
 }
 
 
+public void Edit(int id, string newName)
+{
+  MySqlConnection conn = DB.Connection();
+  conn.Open();
+  var cmd = conn.CreateCommand() as MySqlCommand;
+  cmd.CommandText = @"UPDATE specialties SET specialty = @name WHERE id = @specialtyId;";
+
+  MySqlParameter stylistId = new MySqlParameter();
+  stylistId.ParameterName = "@specialtyId";
+  stylistId.Value = id;
+  cmd.Parameters.Add(stylistId);
+
+  MySqlParameter changeName = new MySqlParameter();
+  changeName.ParameterName = "@name";
+  changeName.Value = newName;
+  cmd.Parameters.Add(changeName);
+
+
+  cmd.ExecuteNonQuery();
+
+_name = newName;
+_id = id;
+
+  conn.Close();
+  if (conn != null)
+  {
+    conn.Dispose();
+  }
+}
+
+
 
 
   }

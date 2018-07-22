@@ -154,6 +154,33 @@ public static List<Stylist> GetStylistBySpecialty(int id)
   return stylists;
 }
 
+
+public static void AddNewSpecialtyJoinStylist(int stylistId, int specialtyId)
+{
+  MySqlConnection conn = DB.Connection();
+  conn.Open();
+  var cmd = conn.CreateCommand() as MySqlCommand;
+  cmd.CommandText = @"INSERT INTO stylists_specialties (stylist_id, specialty_id) VALUES (@StylistId, @SpecialtyId);";
+
+  MySqlParameter stylist_id = new MySqlParameter();
+  stylist_id.ParameterName = "@StylistId";
+  stylist_id.Value = stylistId;
+  cmd.Parameters.Add(stylist_id);
+
+  MySqlParameter specialty_id = new MySqlParameter();
+  specialty_id.ParameterName = "@SpecialtyId";
+  specialty_id.Value = specialtyId;
+  cmd.Parameters.Add(specialty_id);
+
+  cmd.ExecuteNonQuery();
+  conn.Close();
+  if (conn != null)
+  {
+    conn.Dispose();
+  }
+}
+
+
 public void Delete()
 {
 MySqlConnection conn = DB.Connection();

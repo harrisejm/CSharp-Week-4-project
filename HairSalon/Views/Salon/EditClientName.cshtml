@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout";
+}
+<div class="center">
+  <div class="move">
+    <div class="test">
+    <p>Change Client's Name</p>
+      <form action="/clients/update" method="post">
+        <div class='form-group'>
+          <label for='new-client'>Enter New Name</label>
+          <input id='new-client' name='new-client' class='form-control' type='text' value='@Model.GetName()' required>
+        </div>
+
+
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

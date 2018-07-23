@@ -112,6 +112,37 @@ namespace Salon.Tests
       Assert.AreEqual(testClient1.GetId(), testClient[0].GetId());
     }
 
+/////find specialties by stylist Id
+public void Get_SpecialtiesFromStylistId()
+{
+  Stylist testStylist1 = new Stylist("testName");
+  testStylist1.Save();
+  Specialty testSpecialty1 = new Specialty("testSpecialtyName");
+  testSpecialty1.Save();
+
+  Specialty.AddNewSpecialtyJoinStylist(testStylist1.GetId(), testSpecialty1.GetSpecialtyId());
+
+  List<Specialty> testSpecialty = Stylist.GetSpecialtyByStylist(testStylist1.GetId());
+
+  Assert.AreEqual("testSpecialtyName", testSpecialty[0].GetSpecialtyName());
+}
+
+[TestMethod]
+public void Add_AddtoStylists_clients()
+{
+  Stylist testStylist1 = new Stylist("testName");
+  testStylist1.Save();
+  Client testClient1 = new Client("test1");
+  testClient1.Save();
+  Stylist.AddNewClient(testStylist1.GetId(), testClient1.GetId());
+  List<Stylist> testStylist = Client.GetStylistByClient(testClient1.GetId());
+//  List<Client> testClient = Stylist.GetClientsByStylist(testStylist1.GetId());
+  Assert.AreEqual(1, testStylist.Count);
+}
+
+
+
+
 
 
 

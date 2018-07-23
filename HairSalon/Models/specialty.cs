@@ -282,6 +282,8 @@ _id = id;
   }
 }
 
+
+///////////////////
 public static void DeleteAll()
 {
   MySqlConnection conn = DB.Connection();

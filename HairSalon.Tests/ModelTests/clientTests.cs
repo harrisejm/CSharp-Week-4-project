@@ -146,7 +146,7 @@ namespace Salon.Tests
       testClient1.DeleteFromJoin();
 
       List<Stylist> testStylist = Client.GetStylistByClient(testClient1.GetId());
-    //  List<Client> testClient = Stylist.GetClientsByStylist(testStylist1.GetId());
+
       Assert.AreEqual(0, testStylist.Count);
     }
 

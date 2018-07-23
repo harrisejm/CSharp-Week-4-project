@@ -112,6 +112,7 @@ namespace Salon.Tests
       Assert.AreEqual(testClient1.GetId(), testClient[0].GetId());
     }
 
+
 /////find specialties by stylist Id
 public void Get_SpecialtiesFromStylistId()
 {
@@ -127,6 +128,7 @@ public void Get_SpecialtiesFromStylistId()
   Assert.AreEqual("testSpecialtyName", testSpecialty[0].GetSpecialtyName());
 }
 
+//Add to join table stylists_clients
 [TestMethod]
 public void Add_AddtoStylists_clients()
 {
@@ -140,6 +142,33 @@ public void Add_AddtoStylists_clients()
   Assert.AreEqual(1, testStylist.Count);
 }
 
+//Delete from Join table stylists_clients
+[TestMethod]
+public void Delete_DeleteFromStylists_clients_byClientId()
+{
+  Stylist testStylist1 = new Stylist("testName");
+  testStylist1.Save();
+  Client testClient1 = new Client("test1");
+  testClient1.Save();
+  Stylist.AddNewClient(testStylist1.GetId(), testClient1.GetId());
+
+  testStylist1.DeleteFromJoin();
+
+  List<Stylist> testStylist = Client.GetStylistByClient(testClient1.GetId());
+
+  Assert.AreEqual(0, testStylist.Count);
+}
+
+//Edit stylist name
+    [TestMethod]
+    public void Edit_EditClientName()
+    {
+      Stylist testStylist = new Stylist("testName");
+      testStylist.Save();
+      testStylist.Edit(testStylist.GetId(), "NewTestname");
+      Stylist foundStylist = Stylist.Find(testStylist.GetId());
+      Assert.AreEqual("NewTestname", foundStylist.GetName());
+    }
 
 
 

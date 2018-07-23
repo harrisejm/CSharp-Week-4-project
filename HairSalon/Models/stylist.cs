@@ -83,29 +83,27 @@ namespace Salon.Models
       return allStylists;
     }
 
-
     public void Delete()
-  {
-    MySqlConnection conn = DB.Connection();
-    conn.Open();
-
-    var cmd = conn.CreateCommand() as MySqlCommand;
-    cmd.CommandText = @"DELETE FROM stylists WHERE id = @thisId;";
-
-    MySqlParameter searchId = new MySqlParameter();
-    searchId.ParameterName = "@thisId";
-    searchId.Value = _id;
-    cmd.Parameters.Add(searchId);
-
-    cmd.ExecuteNonQuery();
-
-    conn.Close();
-    if (conn != null)
     {
-      conn.Dispose();
-    }
-  }
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
 
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists WHERE id = @thisId;";
+
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@thisId";
+      searchId.Value = _id;
+      cmd.Parameters.Add(searchId);
+
+      cmd.ExecuteNonQuery();
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
 
     public static Stylist Find(int id)
     {
@@ -221,8 +219,29 @@ namespace Salon.Models
       client_id.Value = clientId;
       cmd.Parameters.Add(client_id);
 
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public void DeleteFromJoin()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists_clients WHERE stylist_id = @thisId;";
+
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@thisId";
+      searchId.Value = _id;
+      cmd.Parameters.Add(searchId);
 
       cmd.ExecuteNonQuery();
+
       conn.Close();
       if (conn != null)
       {
@@ -247,11 +266,10 @@ namespace Salon.Models
       changeName.Value = newName;
       cmd.Parameters.Add(changeName);
 
-
       cmd.ExecuteNonQuery();
 
-    _name = newName;
-    _id = id;
+      _name = newName;
+      _id = id;
 
       conn.Close();
       if (conn != null)
@@ -260,29 +278,7 @@ namespace Salon.Models
       }
     }
 
-
-    public void DeleteFromJoin()
-    {
-    MySqlConnection conn = DB.Connection();
-    conn.Open();
-
-    var cmd = conn.CreateCommand() as MySqlCommand;
-    cmd.CommandText = @"DELETE FROM stylists_clients WHERE stylist_id = @thisId;";
-
-    MySqlParameter searchId = new MySqlParameter();
-    searchId.ParameterName = "@thisId";
-    searchId.Value = _id;
-    cmd.Parameters.Add(searchId);
-
-    cmd.ExecuteNonQuery();
-
-    conn.Close();
-    if (conn != null)
-    {
-    conn.Dispose();
-    }
-    }
-
+    //////////////for testing
     public static void DeleteAll()
     {
       MySqlConnection conn = DB.Connection();
@@ -296,9 +292,5 @@ namespace Salon.Models
         conn.Dispose();
       }
     }
-
-
-
-
   }
 }

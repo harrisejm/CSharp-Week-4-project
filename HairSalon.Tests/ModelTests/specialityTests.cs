@@ -126,7 +126,7 @@ namespace Salon.Tests
 
       Assert.AreEqual(0, testSpecialty.Count);
     }
-
+//Find
     [TestMethod]
     public void Find_FindSpecialtyById()
     {
@@ -139,7 +139,7 @@ namespace Salon.Tests
       Assert.AreEqual(allSpecialtys[0], foundSpecialty);
     }
 
-    //Edit client name
+    //Edit specialty name
     [TestMethod]
     public void Edit_EditSpecialtyName()
     {

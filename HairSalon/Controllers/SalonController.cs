@@ -44,7 +44,26 @@ namespace Salon.Controllers
       return View();
     }
 
+        //Change stylist name
+        [HttpGet("/stylist/{id}/stylist")]
+        public ActionResult EditStylistName(int id)
+        {
+          Stylist foundStylist = Stylist.Find(id);
 
+          return View(foundStylist);
+        }
+
+        [HttpPost("/stylist/{id}/name/new")]
+        public ActionResult EditStylsitNameFinal(int id)
+        {
+          Stylist foundStylist = Stylist.Find(id);
+          foundStylist.Edit(id, Request.Form["new-stylist"]);
+          List<Stylist> allStylists = Stylist.GetAll();
+
+          return View("Index", allStylists);
+        }
+
+////****CLIENTS******
     ///show list of clients for a stylist
     [Produces("text/html")]
     [HttpGet("/clients/{id}/all")]
@@ -117,7 +136,7 @@ namespace Salon.Controllers
     }
 
     [HttpGet("/clients/{id}/delete")]
-    public ActionResult Delete(int id)
+    public ActionResult DeleteClient(int id)
     {
       Client selectClient = Client.FindClient(id);
       List<Stylist> foundStylist = Client.GetStylistByClient(id);
@@ -129,44 +148,7 @@ namespace Salon.Controllers
     }
 
 
-//******* STYLISTS *****
 
-    //Change stylist name
-    [HttpGet("/stylist/{id}/stylist")]
-    public ActionResult EditStylistName(int id)
-    {
-      Stylist foundStylist = Stylist.Find(id);
-
-      return View(foundStylist);
-    }
-
-    [HttpPost("/stylist/{id}/name/new")]
-    public ActionResult EditStylsitNameFinal(int id)
-    {
-      Stylist foundStylist = Stylist.Find(id);
-      foundStylist.Edit(id, Request.Form["new-stylist"]);
-      List<Stylist> allStylists = Stylist.GetAll();
-
-      return View("Index", allStylists);
-    }
-
-
-    ////////LIST ALL CLIENTS
-    [HttpGet("/clients/list/all")]
-    public ActionResult allClients()
-    {
-      List<Client> allClient = Client.GetAll();
-
-      return View(allClient);
-    }
-
-    [HttpGet("/clients/{id}/update")]
-    public ActionResult EditClientsAll(int id)
-    {
-      List<Stylist> thisStylist = Stylist.GetAll();
-
-      return View(thisStylist);
-    }
 
 
 //*****SPECIALTIES*******
@@ -195,9 +177,8 @@ namespace Salon.Controllers
       return View("Specialties", allSpecialty);
     }
 
-
     [HttpGet("/specialty/{id}/all")]
-    public ActionResult stylistsSpecialties(int id)
+    public ActionResult StylistsSpecialties(int id)
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
 
@@ -282,7 +263,7 @@ namespace Salon.Controllers
       selectedSpecialty.DeleteFromJoin();
 
       return View(foundStylist);
-
+     }
 
 
     [HttpGet("/specialty/{id}/delete")]
